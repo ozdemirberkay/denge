@@ -12,9 +12,12 @@ class InitScreen extends StatelessWidget {
       backgroundColor: const Color(0xff305F72),
       body: Column(
         children: [
-          Container(
-            padding: EdgeInsets.all(25),
-            child: Image.asset("assets/images/kitap.png"),
+          SizedBox(height: 20),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(25),
+              child: Image.asset("assets/images/kitap.png"),
+            ),
           ),
           SizedBox(height: 20),
           Expanded(
@@ -38,25 +41,30 @@ class InitScreen extends StatelessWidget {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          DengeButton(
-                            label: "Giriş Yap",
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()));
-                            },
+                          Expanded(
+                            child: DengeButton(
+                              label: "Giriş Yap",
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()));
+                              },
+                            ),
                           ),
                           const SizedBox(width: 15),
-                          DengeButton(
-                            label: "Kayıt Ol",
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignupPage()));
-                            },
+                          Expanded(
+                            child: DengeButton(
+                              label: "Kayıt Ol",
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const SignupPage()));
+                              },
+                            ),
                           )
                         ]),
                   ),

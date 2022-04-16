@@ -32,6 +32,10 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.indigo,
+        textTheme: Theme.of(context).textTheme.apply(
+              bodyColor: const Color(0xff305F72),
+              displayColor: const Color(0xff305F72),
+            ),
       ),
       home: const InitScreen(),
     );

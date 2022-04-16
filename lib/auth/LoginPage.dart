@@ -1,4 +1,7 @@
 import 'package:denge/auth/SignupPage.dart';
+import 'package:denge/widget/DengeButton.dart';
+import 'package:denge/widget/DengeInput.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -40,7 +43,51 @@ class _LoginPageState extends State<LoginPage> {
           ),
         ],
       ),
-      body: const Center(child: Text("Content")),
+      body: Form(
+        child: SingleChildScrollView(
+          dragStartBehavior: DragStartBehavior.down,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                padding: EdgeInsets.all(25),
+                child: Image.asset(
+                  "assets/images/kitap.png",
+                  height: MediaQuery.of(context).size.height / 3,
+                ),
+              ),
+              Container(
+                alignment: Alignment.bottomCenter,
+                decoration: const BoxDecoration(
+                  color: Color(0xffEAF9FE),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(25),
+                      topRight: Radius.circular(25)),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Text("Giriş Yap"),
+                    SizedBox(height: 20),
+                    DengeInput(),
+                    SizedBox(height: 20),
+                    DengeInput(),
+                    SizedBox(height: 20),
+                    Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        child: DengeButton(
+                          label: "Giriş Yap",
+                          onPressed: () {},
+                        )),
+                    SizedBox(height: 20),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
