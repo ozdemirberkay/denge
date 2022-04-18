@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
 class DengeInput extends StatefulWidget {
-  const DengeInput({Key? key}) : super(key: key);
+  final String? labelText;
+  final TextEditingController controller;
+  final TextInputType keyboardType;
+  final bool obscureText;
+  final IconData suffixIcon;
+
+  const DengeInput(
+      {Key? key,
+      this.labelText,
+      required this.controller,
+      this.keyboardType = TextInputType.text,
+      this.obscureText = false,
+      required this.suffixIcon})
+      : super(key: key);
 
   @override
   State<DengeInput> createState() => _DengeInputState();
@@ -14,8 +27,15 @@ class _DengeInputState extends State<DengeInput> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextFormField(
         keyboardType: TextInputType.text,
-        decoration: const InputDecoration(
-          labelText: "Deneme",
+        controller: widget.controller,
+        obscureText: widget.obscureText,
+        decoration: InputDecoration(
+          labelText: widget.labelText,
+          labelStyle: TextStyle(color: Color(0xff305F72)),
+          suffixIcon: Icon(
+            widget.suffixIcon,
+            color: Color(0xff305F72),
+          ),
           border: OutlineInputBorder(
             borderSide: BorderSide(
               // color: Color(0xff305F72),
