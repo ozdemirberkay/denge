@@ -1,5 +1,6 @@
 import 'package:denge/auth/LoginPage.dart';
 import 'package:denge/auth/SignupPage.dart';
+import 'package:denge/optiyol/MessageUsers.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:flutter/material.dart';
 
@@ -69,6 +70,14 @@ class InitScreen extends StatelessWidget {
                         ]),
                   ),
                   const SizedBox(height: 20),
+                  DengeButton(
+                    label: "Optiyol",
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MessageUsers(),
+                      ));
+                    },
+                  ),
                 ],
               ),
             ),
