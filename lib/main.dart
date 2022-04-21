@@ -1,5 +1,5 @@
 import 'package:denge/auth/InitScreen.dart';
-import 'package:denge/optiyol/MessageUsers.dart';
+import 'package:denge/utils/appColors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -35,11 +35,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
 
         textTheme: Theme.of(context).textTheme.apply(
-              bodyColor: const Color(0xff305F72),
-              displayColor: const Color(0xff305F72),
+              bodyColor: darkColor,
+              displayColor: darkColor,
             ),
       ),
-      home: const MessageUsers(),
+      home: const InitScreen(),
     );
   }
 }

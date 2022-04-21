@@ -1,3 +1,4 @@
+import 'package:denge/utils/appColors.dart';
 import 'package:flutter/material.dart';
 
 class DengeInput extends StatefulWidget {
@@ -31,14 +32,14 @@ class _DengeInputState extends State<DengeInput> {
         obscureText: widget.obscureText,
         decoration: InputDecoration(
           labelText: widget.labelText,
-          labelStyle: TextStyle(color: Color(0xff305F72)),
+          labelStyle: TextStyle(color: darkColor),
           suffixIcon: Icon(
             widget.suffixIcon,
-            color: Color(0xff305F72),
+            color: darkColor,
           ),
           border: OutlineInputBorder(
             borderSide: BorderSide(
-              // color: Color(0xff305F72),
+              // color: darkColor,
               color: Colors.pink,
               width: 10,
             ),

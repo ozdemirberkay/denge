@@ -1,4 +1,6 @@
+import 'package:denge/DashboardScreen.dart';
 import 'package:denge/auth/SignupPage.dart';
+import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeInput.dart';
 import 'package:flutter/gestures.dart';
@@ -33,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff305F72),
+      backgroundColor: darkColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -42,14 +44,14 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xffEAF9FE),
+                color: lightColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
                 child: const Text(
                   "Kayıt Ol",
                   style: TextStyle(
-                    color: Color(0xff305F72),
+                    color: darkColor,
                   ),
                 ),
                 onPressed: () {
@@ -81,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                 Container(
                   alignment: Alignment.bottomCenter,
                   decoration: const BoxDecoration(
-                    color: Color(0xffEAF9FE),
+                    color: lightColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25)),
@@ -114,7 +116,13 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.symmetric(horizontal: 10),
                           child: DengeButton(
                             label: "Giriş Yap",
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          DashboardScreen())));
+                            },
                           )),
                       SizedBox(height: 20),
                     ],

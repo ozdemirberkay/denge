@@ -1,13 +1,13 @@
 import 'package:denge/utils/appColors.dart';
 import 'package:flutter/material.dart';
 
-class DengeButton extends StatelessWidget {
+class DengeBorderButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final IconData? icon;
   final Color? color;
 
-  const DengeButton({
+  const DengeBorderButton({
     Key? key,
     required this.label,
     this.onPressed,

@@ -1,4 +1,6 @@
+import 'package:denge/DashboardScreen.dart';
 import 'package:denge/auth/LoginPage.dart';
+import 'package:denge/utils/appColors.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/DengeButton.dart';
@@ -19,7 +21,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _nameController = TextEditingController();
     _emailController = TextEditingController();
@@ -29,7 +30,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _nameController.dispose();
     _emailController.dispose();
@@ -40,7 +40,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff305F72),
+      backgroundColor: darkColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -49,14 +49,14 @@ class _SignupPageState extends State<SignupPage> {
             padding: const EdgeInsets.only(right: 15, top: 10, bottom: 10),
             child: Container(
               decoration: BoxDecoration(
-                color: const Color(0xffEAF9FE),
+                color: lightColor,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
                 child: const Text(
                   "Giriş Yap",
                   style: TextStyle(
-                    color: Color(0xff305F72),
+                    color: darkColor,
                   ),
                 ),
                 onPressed: () {
@@ -79,7 +79,7 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.all(25),
+                  padding: const EdgeInsets.all(25),
                   child: Image.asset(
                     "assets/images/kitap.png",
                     height: MediaQuery.of(context).size.height / 4,
@@ -88,53 +88,59 @@ class _SignupPageState extends State<SignupPage> {
                 Container(
                   alignment: Alignment.bottomCenter,
                   decoration: const BoxDecoration(
-                    color: Color(0xffEAF9FE),
+                    color: lightColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25)),
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 20),
-                      Text("Kayıt Ol",
+                      const SizedBox(height: 20),
+                      const Text("Kayıt Ol",
                           style: TextStyle(
                               fontSize: 35, fontWeight: FontWeight.bold)),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       DengeInput(
                         labelText: "İsim Soyisim",
                         controller: _nameController,
                         suffixIcon: Icons.person,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       DengeInput(
                         labelText: "E-mail",
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: Icons.email,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       DengeInput(
                         labelText: "Şifre",
                         controller: _passwordController,
                         obscureText: true,
                         suffixIcon: Icons.lock,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       DengeInput(
                         labelText: "Şifre Tekrar",
                         controller: _passwordAgainController,
                         obscureText: true,
                         suffixIcon: Icons.lock,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Container(
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: DengeButton(
                             label: "Kayıt Ol",
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) =>
+                                          const DashboardScreen())));
+                            },
                           )),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),
