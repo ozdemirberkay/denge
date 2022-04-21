@@ -1,4 +1,5 @@
 import 'package:denge/auth/InitScreen.dart';
+import 'package:denge/optiyol/MessageUsers.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
               displayColor: const Color(0xff305F72),
             ),
       ),
-      home: const InitScreen(),
+      home: const MessageUsers(),
     );
   }
 }

@@ -70,14 +70,6 @@ class InitScreen extends StatelessWidget {
                         ]),
                   ),
                   const SizedBox(height: 20),
-                  DengeButton(
-                    label: "Optiyol",
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => MessageUsers(),
-                      ));
-                    },
-                  ),
                 ],
               ),
             ),

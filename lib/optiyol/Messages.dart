@@ -17,8 +17,10 @@ class Messages extends StatefulWidget {
 
 class _MessagesState extends State<Messages> {
   String message = "aaaaaaaaa";
-
+  late List<Map> messageMap = [];
   late var messages;
+  late var messagesListen;
+
   //Future<QuerySnapshot<Map<String, dynamic>>>
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -26,15 +28,44 @@ class _MessagesState extends State<Messages> {
   @override
   void initState() {
     // TODO: implement initState
-    getmessages();
+    //  getMessages();
     super.initState();
   }
 
-  void getmessages() async {
+  Future getMessages() async {
     try {
-      messages = firestore.collection("deneme").get();
+      messages = await firestore
+          .collection("mesajlar")
+          .doc("userid")
+          .collection("mesaj")
+          .get();
+      messageMap.clear();
+      for (var item in messages.docs) {
+        messageMap.add(item.data());
+      }
+      return messageMap;
     } on Exception catch (e) {
-      print(e.toString());
+      print(e.toString() + "xxxxxxx");
+    }
+  }
+
+  Future listenMessages() async {
+    try {
+      messagesListen = await firestore
+          .collection("mesajlar")
+          .doc("userid")
+          .collection("mesaj")
+          .snapshots();
+      messageMap.clear();
+      messagesListen.listen((event) {
+        for (var item in event.docChanges) {
+          messageMap.add(item.data());
+        }
+      });
+
+      return messageMap;
+    } on Exception catch (e) {
+      print(e.toString() + "xxxxxxx");
     }
   }
 
@@ -134,14 +165,25 @@ class _MessagesState extends State<Messages> {
             Expanded(
               child: Container(
                 color: Color(0xfF5F5FA),
-                child: ListView.builder(
-                  reverse: true,
-                  itemCount: 1,
-                  itemBuilder: (BuildContext context, int index) {
-                    //print(messages.docs.toString());
-                    return GelenMesaj(message: message);
-                  },
-                ),
+                child: FutureBuilder(
+                    future: getMessages(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return ListView.builder(
+                          reverse: true,
+                          itemCount: messageMap.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return messageMap[index]["kimden"] == "userid"
+                                ? GidenMesaj(
+                                    message: messageMap[index]["mesaj"])
+                                : GelenMesaj(
+                                    message: messageMap[index]["mesaj"]);
+                          },
+                        );
+                      } else {
+                        return CircularProgressIndicator();
+                      }
+                    }),
               ),
             ),
             Container(
@@ -156,9 +198,9 @@ class _MessagesState extends State<Messages> {
                           border: InputBorder.none,
                           hintText: "Mesajınız...",
                         ),
-                        onChanged: (value) => setState(() {
+                        onChanged: (value) {
                           message = value;
-                        }),
+                        },
                       ),
                     ),
                   ),
