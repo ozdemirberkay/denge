@@ -1,3 +1,4 @@
+import 'package:denge/HomePage.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/appColors.dart';
@@ -14,7 +15,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<String> label = ["Kategoriler", "Quizler", "Kaydedilenler"];
   renderWidget() {
     if (selectedIndex == 0) {
-      return Container();
+      return HomePage();
     } else if (selectedIndex == 1) {
       return Container();
     } else if (selectedIndex == 2) {
