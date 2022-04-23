@@ -76,7 +76,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
               Row(
                 children: const [
                   CircleAvatar(
-                    radius: 25,
+                    radius: 24,
                     backgroundImage:
                         AssetImage("assets/images/ingilizbayrak.png"),
                   ),
@@ -109,10 +109,11 @@ class _CategoryDetailState extends State<CategoryDetail> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
+              const SizedBox(height: 5),
               Row(
                 children: const [
                   CircleAvatar(
-                    radius: 25,
+                    radius: 24,
                     backgroundImage: AssetImage("assets/images/türkbayrak.png"),
                   ),
                   SizedBox(width: 15),
