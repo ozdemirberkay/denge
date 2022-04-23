@@ -1,3 +1,5 @@
+import 'package:denge/utils/appColors.dart';
+import 'package:denge/widget/RecordedWidget.dart';
 import 'package:flutter/material.dart';
 
 class RecordedPage extends StatefulWidget {
@@ -8,17 +10,49 @@ class RecordedPage extends StatefulWidget {
 }
 
 class _RecordedPageState extends State<RecordedPage> {
+  List<String> deneme = ["aaaaaAA", "bb", "Cccccccccc", "ddddddd", "e", "xxxx"];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(children: [
+    return Column(
+      children: [
+        const SizedBox(height: 5),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [
-            Text("İNGİLİZCE"),
-            Text("TÜRKÇE"),
+            Text(
+              "İNGİLİZCE",
+              style: TextStyle(
+                  fontSize: 24, color: darkColor, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "TÜRKÇE",
+              style: TextStyle(
+                  fontSize: 24, color: darkColor, fontWeight: FontWeight.bold),
+            ),
           ],
-        )
-      ]),
+        ),
+        const SizedBox(height: 5),
+        Container(
+          margin: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            bottom: 12,
+          ),
+          color: darkColor,
+          height: 3,
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return RecordedWidget(
+                turkishWord: deneme[index],
+                englishWord: deneme[index + 1],
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

@@ -62,14 +62,13 @@ class _CategoryDetailState extends State<CategoryDetail> {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  FloatingActionButton(
+                  FloatingActionButton.small(
                     elevation: 0,
                     backgroundColor: lightColor,
                     onPressed: () {},
                     child: const Icon(
                       Icons.bookmark,
                       color: darkColor,
-                      size: 30,
                     ),
                   ),
                 ],
@@ -164,7 +163,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
               ),
             ],
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 15),
         ],
       ),
     );

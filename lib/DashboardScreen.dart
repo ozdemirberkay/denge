@@ -65,7 +65,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
               DengeOutlinedButton(
                 label: "Kaydedilenler",
                 icon: Icons.bookmark,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    selectedIndex = 2;
+                  });
+                },
               ),
               DengeOutlinedButton(
                 label: "Quiz Başarıları",
