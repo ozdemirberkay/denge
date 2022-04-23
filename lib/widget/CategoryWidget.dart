@@ -18,7 +18,10 @@ class CategoryWidget extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => CategoryDetail(),
+              builder: (context) => CategoryDetail(
+                categoryPhoto: categoryPhoto,
+                categoryName: categoryName,
+              ),
             ));
       },
       child: Container(

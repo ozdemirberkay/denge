@@ -1,4 +1,6 @@
 import 'package:denge/HomePage.dart';
+import 'package:denge/widget/DengeButton.dart';
+import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/appColors.dart';
@@ -41,7 +43,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 child: Column(
                   children: const [
-                    Expanded(child: CircleAvatar(radius: 60)),
+                    Expanded(
+                        child: CircleAvatar(
+                      radius: 60,
+                      backgroundColor: lightColor,
+                    )),
                     SizedBox(height: 5),
                     Text(
                       "Berkay Özdemir",
@@ -49,6 +55,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ],
                 ),
+              ),
+              DengeOutlinedButton(
+                label: "Profil",
+                icon: Icons.person,
+                onPressed: () {},
+              ),
+              DengeOutlinedButton(
+                label: "Kaydedilenler",
+                icon: Icons.bookmark,
+                onPressed: () {},
+              ),
+              DengeOutlinedButton(
+                label: "Quiz Başarıları",
+                icon: Icons.quiz,
+                onPressed: () {},
+              ),
+              DengeOutlinedButton(
+                label: "Çıkış Yap",
+                icon: Icons.logout,
+                onPressed: () {},
               ),
             ],
           ),
@@ -61,7 +87,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         centerTitle: true,
         title: Text(
           label[selectedIndex],
-          style: const TextStyle(color: darkColor, fontSize: 24),
+          style: const TextStyle(color: darkColor, fontSize: 27),
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -71,6 +97,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         selectedItemColor: darkColor,
+        unselectedItemColor: darkColor.withOpacity(0.7),
         backgroundColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
