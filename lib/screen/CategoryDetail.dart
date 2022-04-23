@@ -53,7 +53,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: lightColor,
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                     ),
                     child: const Text(
                       "5/67",
@@ -61,7 +61,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
                           color: darkColor, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  const SizedBox(width: 15),
+                  const SizedBox(width: 10),
                   FloatingActionButton(
                     elevation: 0,
                     backgroundColor: lightColor,

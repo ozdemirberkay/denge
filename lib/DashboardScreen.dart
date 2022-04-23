@@ -1,4 +1,5 @@
 import 'package:denge/HomePage.dart';
+import 'package:denge/screen/RecordedPage.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     } else if (selectedIndex == 1) {
       return Container();
     } else if (selectedIndex == 2) {
-      return Container();
+      return const RecordedPage();
     }
     return Container();
   }
