@@ -28,7 +28,7 @@ class _DengeOutlinedButtonState extends State<DengeOutlinedButton> {
         style: OutlinedButton.styleFrom(
           side: const BorderSide(width: 1.5, color: darkColor),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(8.0),
           ),
         ),
         onPressed: widget.onPressed,

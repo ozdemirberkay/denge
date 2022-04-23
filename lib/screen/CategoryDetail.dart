@@ -34,9 +34,11 @@ class _CategoryDetailState extends State<CategoryDetail> {
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24.0, left: 24, right: 24),
-            child: Image(image: AssetImage(imagePath)),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 24.0, left: 24, right: 24),
+              child: Image(image: AssetImage(imagePath)),
+            ),
           ),
           Container(
             padding: EdgeInsets.all(12),
@@ -48,12 +50,18 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(
-                    decoration: const BoxDecoration(color: lightColor),
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: lightColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                     child: const Text(
                       "5/67",
-                      style: TextStyle(color: darkColor),
+                      style: TextStyle(
+                          color: darkColor, fontWeight: FontWeight.bold),
                     ),
                   ),
+                  const SizedBox(width: 15),
                   FloatingActionButton(
                     elevation: 0,
                     backgroundColor: lightColor,
@@ -67,46 +75,81 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 ],
               ),
               Row(
-                children: [
+                children: const [
                   CircleAvatar(
-                      radius: 30,
-                      backgroundImage:
-                          AssetImage("assets/images/ingilizbayrak.png")),
+                    radius: 25,
+                    backgroundImage:
+                        AssetImage("assets/images/ingilizbayrak.png"),
+                  ),
+                  SizedBox(width: 15),
                   Text(
                     "İngilizce",
-                    style: TextStyle(color: lightColor),
+                    style: TextStyle(
+                        color: lightColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
                   )
                 ],
               ),
               Container(
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  right: 24,
+                  bottom: 8,
+                  top: 8,
+                ),
                 decoration: BoxDecoration(
                   color: lightColor,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text("Crocodile"),
+                child: const Text(
+                  "Crocodile",
+                  style: TextStyle(
+                      color: darkColor,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               Row(
-                children: [
+                children: const [
                   CircleAvatar(
-                      radius: 30,
-                      backgroundImage:
-                          AssetImage("assets/images/türkbayrak.png")),
+                    radius: 25,
+                    backgroundImage: AssetImage("assets/images/türkbayrak.png"),
+                  ),
+                  SizedBox(width: 15),
                   Text(
                     "Türkçe",
-                    style: TextStyle(color: lightColor),
+                    style: TextStyle(
+                        color: lightColor,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
                   )
                 ],
               ),
               Container(
+                padding: const EdgeInsets.only(
+                  left: 24,
+                  right: 24,
+                  bottom: 8,
+                  top: 8,
+                ),
                 decoration: BoxDecoration(
                   color: lightColor,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                child: Text("Crocodile"),
+                child: const Text(
+                  "Timsah",
+                  style: TextStyle(
+                      color: darkColor,
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
+              const SizedBox(height: 10),
             ]),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               DengeOutlinedButton(
                 label: "Önceki Kelime",
@@ -120,7 +163,8 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 onPressed: () {},
               ),
             ],
-          )
+          ),
+          const SizedBox(height: 5),
         ],
       ),
     );
