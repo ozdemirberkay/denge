@@ -27,7 +27,7 @@ class CategoryWidget extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: darkColor, borderRadius: BorderRadius.circular(16)),
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(
           children: [
             Expanded(

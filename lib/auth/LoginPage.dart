@@ -3,7 +3,6 @@ import 'package:denge/auth/SignupPage.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeInput.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,7 +17,6 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController _passwordController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _emailController = TextEditingController();
     _passwordController = TextEditingController();
@@ -26,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _emailController.dispose();
     _passwordController.dispose();
@@ -74,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  padding: EdgeInsets.all(25),
+                  padding: const EdgeInsets.all(25),
                   child: Image.asset(
                     "assets/images/kitap.png",
                     height: 2 * MediaQuery.of(context).size.height / 5,
@@ -90,30 +87,30 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         "Giriş Yap",
                         style: TextStyle(
                             fontSize: 35, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       DengeInput(
                         labelText: "E-mail",
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: Icons.email,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       DengeInput(
                         labelText: "Şifre",
                         controller: _passwordController,
                         obscureText: true,
                         suffixIcon: Icons.lock,
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Container(
                           width: double.infinity,
-                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: DengeButton(
                             label: "Giriş Yap",
                             onPressed: () {
@@ -121,10 +118,10 @@ class _LoginPageState extends State<LoginPage> {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>
-                                          DashboardScreen())));
+                                          const DashboardScreen())));
                             },
                           )),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                     ],
                   ),
                 ),

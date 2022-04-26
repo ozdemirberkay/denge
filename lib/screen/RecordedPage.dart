@@ -52,6 +52,27 @@ class _RecordedPageState extends State<RecordedPage> {
             },
           ),
         ),
+        Container(
+          margin: const EdgeInsets.only(
+            left: 18,
+            right: 18,
+            bottom: 12,
+          ),
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            bottom: 12,
+            top: 12,
+          ),
+          decoration: BoxDecoration(
+              color: darkColor, borderRadius: BorderRadius.circular(8)),
+          child: const Text(
+            "Kaydedilen Kelime Sayısı : 5",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: lightColor, fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        ),
       ],
     );
   }

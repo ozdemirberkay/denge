@@ -1,4 +1,7 @@
 import 'package:denge/HomePage.dart';
+import 'package:denge/QuizPage.dart';
+import 'package:denge/screen/Achievements.dart';
+import 'package:denge/screen/Profile.dart';
 import 'package:denge/screen/RecordedPage.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
@@ -20,7 +23,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     if (selectedIndex == 0) {
       return HomePage();
     } else if (selectedIndex == 1) {
-      return Container();
+      return const QuizPage();
     } else if (selectedIndex == 2) {
       return const RecordedPage();
     }
@@ -60,7 +63,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               DengeOutlinedButton(
                 label: "Profil",
                 icon: Icons.person,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Profile(),
+                      ));
+                },
               ),
               DengeOutlinedButton(
                 label: "Kaydedilenler",
@@ -73,9 +83,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 },
               ),
               DengeOutlinedButton(
-                label: "Quiz Başarıları",
+                label: "Başarılar",
                 icon: Icons.quiz,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Achievements(),
+                      ));
+                },
               ),
               DengeOutlinedButton(
                 label: "Çıkış Yap",

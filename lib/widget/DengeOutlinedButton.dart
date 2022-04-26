@@ -6,13 +6,15 @@ class DengeOutlinedButton extends StatefulWidget {
   final IconData icon;
   final bool? reverse;
   final VoidCallback? onPressed;
+  final Color color;
 
   const DengeOutlinedButton(
       {Key? key,
       required this.label,
       required this.icon,
       this.reverse = false,
-      this.onPressed})
+      this.onPressed,
+      this.color = darkColor})
       : super(key: key);
 
   @override
@@ -26,7 +28,7 @@ class _DengeOutlinedButtonState extends State<DengeOutlinedButton> {
       padding: const EdgeInsets.only(left: 12.0, right: 12.0),
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(width: 1.5, color: darkColor),
+          side: BorderSide(width: 1.5, color: widget.color),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
@@ -38,12 +40,12 @@ class _DengeOutlinedButtonState extends State<DengeOutlinedButton> {
                 children: [
                   Text(
                     widget.label,
-                    style: const TextStyle(color: darkColor),
+                    style: TextStyle(color: widget.color),
                   ),
                   const SizedBox(width: 10),
                   Icon(
                     widget.icon,
-                    color: darkColor,
+                    color: widget.color,
                   ),
                 ],
               )
@@ -52,12 +54,12 @@ class _DengeOutlinedButtonState extends State<DengeOutlinedButton> {
                 children: [
                   Icon(
                     widget.icon,
-                    color: darkColor,
+                    color: widget.color,
                   ),
                   const SizedBox(width: 10),
                   Text(
                     widget.label,
-                    style: const TextStyle(color: darkColor),
+                    style: TextStyle(color: widget.color),
                   ),
                 ],
               ),

@@ -20,28 +20,32 @@ class RecordedWidget extends StatelessWidget {
       decoration: BoxDecoration(
           color: darkColor, borderRadius: BorderRadius.circular(8)),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const CircleAvatar(
             backgroundImage: AssetImage("assets/images/ingilizbayrak.png"),
           ),
-          Container(
-            padding: const EdgeInsets.only(
-              left: 6,
-              right: 6,
-              bottom: 8,
-              top: 8,
-            ),
-            decoration: BoxDecoration(
-              color: lightColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              englishWord,
-              style: const TextStyle(
-                  color: darkColor, fontWeight: FontWeight.bold),
+          const SizedBox(width: 5),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 6,
+                right: 6,
+                bottom: 8,
+                top: 8,
+              ),
+              decoration: BoxDecoration(
+                color: lightColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                englishWord,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: darkColor, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
+          const SizedBox(width: 5),
           FloatingActionButton.small(
             elevation: 0,
             backgroundColor: lightColor,
@@ -51,23 +55,28 @@ class RecordedWidget extends StatelessWidget {
               color: darkColor,
             ),
           ),
-          Container(
-            padding: const EdgeInsets.only(
-              left: 6,
-              right: 6,
-              bottom: 8,
-              top: 8,
-            ),
-            decoration: BoxDecoration(
-              color: lightColor,
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Text(
-              turkishWord,
-              style: const TextStyle(
-                  color: darkColor, fontWeight: FontWeight.bold),
+          const SizedBox(width: 5),
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.only(
+                left: 6,
+                right: 6,
+                bottom: 8,
+                top: 8,
+              ),
+              decoration: BoxDecoration(
+                color: lightColor,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                turkishWord,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    color: darkColor, fontWeight: FontWeight.bold),
+              ),
             ),
           ),
+          const SizedBox(width: 5),
           const CircleAvatar(
             backgroundImage: AssetImage("assets/images/türkbayrak.png"),
           ),

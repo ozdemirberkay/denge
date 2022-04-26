@@ -49,25 +49,25 @@ class _MessagesState extends State<Messages> {
     }
   }
 
-  Future listenMessages() async {
-    try {
-      messagesListen = await firestore
-          .collection("mesajlar")
-          .doc("userid")
-          .collection("mesaj")
-          .snapshots();
-      messageMap.clear();
-      messagesListen.listen((event) {
-        for (var item in event.docChanges) {
-          messageMap.add(item.data());
-        }
-      });
+  // Future listenMessages() async {
+  //   try {
+  //     messagesListen = await firestore
+  //         .collection("mesajlar")
+  //         .doc("userid")
+  //         .collection("mesaj")
+  //         .snapshots();
+  //     messageMap.clear();
+  //     messagesListen.listen((event) {
+  //       for (var item in event.docChanges) {
+  //         messageMap.add(item.data());
+  //       }
+  //     });
 
-      return messageMap;
-    } on Exception catch (e) {
-      print(e.toString() + "xxxxxxx");
-    }
-  }
+  //     return messageMap;
+  //   } on Exception catch (e) {
+  //     print(e.toString() + "xxxxxxx");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

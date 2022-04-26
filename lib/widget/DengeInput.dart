@@ -32,12 +32,12 @@ class _DengeInputState extends State<DengeInput> {
         obscureText: widget.obscureText,
         decoration: InputDecoration(
           labelText: widget.labelText,
-          labelStyle: TextStyle(color: darkColor),
+          labelStyle: const TextStyle(color: darkColor),
           suffixIcon: Icon(
             widget.suffixIcon,
             color: darkColor,
           ),
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
             borderSide: BorderSide(
               // color: darkColor,
               color: Colors.pink,
