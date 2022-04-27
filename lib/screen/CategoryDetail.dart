@@ -1,19 +1,27 @@
+import 'package:denge/data/strings.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:flutter/material.dart';
 
+import '../model/category_data.dart';
+
 class CategoryDetail extends StatefulWidget {
   final String categoryName;
   final String categoryPhoto;
-  const CategoryDetail(
+  late List<CategoryData> allData;
+
+  CategoryDetail(
       {Key? key, required this.categoryName, required this.categoryPhoto})
-      : super(key: key);
+      : super(key: key) {
+    allData = getData();
+  }
 
   @override
   State<CategoryDetail> createState() => _CategoryDetailState();
 }
 
 class _CategoryDetailState extends State<CategoryDetail> {
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     String imagePath = "assets/images/${widget.categoryPhoto}";
@@ -41,7 +49,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(12),
+            padding: const EdgeInsets.all(12),
             margin: const EdgeInsets.only(bottom: 12.0, left: 24, right: 24),
             decoration: BoxDecoration(
                 color: darkColor, borderRadius: BorderRadius.circular(12)),
@@ -55,10 +63,12 @@ class _CategoryDetailState extends State<CategoryDetail> {
                       color: lightColor,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: const Text(
-                      "5/67",
-                      style: TextStyle(
-                          color: darkColor, fontWeight: FontWeight.bold),
+                    child: Text(
+                      "${(index + 1).toString()}/${(widget.allData.length).toString()} ",
+                      style: const TextStyle(
+                          color: darkColor,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 17),
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -101,9 +111,9 @@ class _CategoryDetailState extends State<CategoryDetail> {
                   color: lightColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text(
-                  "Crocodile",
-                  style: TextStyle(
+                child: Text(
+                  (widget.allData[index].ingilizce),
+                  style: const TextStyle(
                       color: darkColor,
                       fontSize: 32,
                       fontWeight: FontWeight.bold),
@@ -137,9 +147,9 @@ class _CategoryDetailState extends State<CategoryDetail> {
                   color: lightColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text(
-                  "Timsah",
-                  style: TextStyle(
+                child: Text(
+                  (widget.allData[index].turkce),
+                  style: const TextStyle(
                       color: darkColor,
                       fontSize: 32,
                       fontWeight: FontWeight.bold),
@@ -155,12 +165,24 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 label: "Önceki Kelime",
                 icon: Icons.arrow_back,
                 reverse: true,
-                onPressed: () {},
+                onPressed: () {
+                  if (index > 0) {
+                    setState(() {
+                      index--;
+                    });
+                  }
+                },
               ),
               DengeOutlinedButton(
                 label: "Sonraki Kelime",
                 icon: Icons.arrow_forward,
-                onPressed: () {},
+                onPressed: () {
+                  if (index < widget.allData.length - 1) {
+                    setState(() {
+                      index++;
+                    });
+                  }
+                },
               ),
             ],
           ),
@@ -169,4 +191,14 @@ class _CategoryDetailState extends State<CategoryDetail> {
       ),
     );
   }
+}
+
+List<CategoryData> getData() {
+  late List<CategoryData> tempAllData = [];
+
+  for (var item in Strings.DATA) {
+    CategoryData temp = CategoryData.fromMap(item);
+    tempAllData.add(temp);
+  }
+  return tempAllData;
 }

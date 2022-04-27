@@ -20,4 +20,19 @@ class Strings {
     "renkler.png",
     "günler.png"
   ];
+
+  static const List<Map<String, String>> DATA = [
+    {
+      "turkce": "DenemeTr",
+      "ingilizce": "DenemeIng",
+    },
+    {
+      "turkce": "denemeiki",
+      "ingilizce": "denemeuc",
+    },
+    {
+      "turkce": "denemedort",
+      "ingilizce": "denemebes",
+    },
+  ];
 }

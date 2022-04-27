@@ -32,7 +32,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: lightColor,
       drawer: Drawer(
           child: Drawer(
@@ -64,12 +66,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: "Profil",
                 icon: Icons.person,
                 onPressed: () {
-                  Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const Profile(),
                       ));
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                  if (_scaffoldKey.currentState!.isDrawerOpen) {
+                    _scaffoldKey.currentState!.openEndDrawer();
+                  }
                 },
               ),
               DengeOutlinedButton(
@@ -86,12 +93,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 label: "Başarılar",
                 icon: Icons.quiz,
                 onPressed: () {
-                  Navigator.pop(context);
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const Achievements(),
                       ));
+                  setState(() {
+                    selectedIndex = 0;
+                  });
+                  if (_scaffoldKey.currentState!.isDrawerOpen) {
+                    _scaffoldKey.currentState!.openEndDrawer();
+                  }
                 },
               ),
               DengeOutlinedButton(
