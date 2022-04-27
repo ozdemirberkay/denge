@@ -8,12 +8,16 @@ import '../model/category_data.dart';
 class CategoryDetail extends StatefulWidget {
   final String categoryName;
   final String categoryPhoto;
-  late List<CategoryData> allData;
+  final int categoryIndex;
+  late final List<CategoryData> allData;
 
   CategoryDetail(
-      {Key? key, required this.categoryName, required this.categoryPhoto})
+      {Key? key,
+      required this.categoryName,
+      required this.categoryPhoto,
+      required this.categoryIndex})
       : super(key: key) {
-    allData = getData();
+    allData = getData(categoryIndex);
   }
 
   @override
@@ -170,6 +174,18 @@ class _CategoryDetailState extends State<CategoryDetail> {
                     setState(() {
                       index--;
                     });
+                  } else {
+                    final snackBar = SnackBar(
+                      content: const Text(
+                        'İlk Kelimedesiniz',
+                        textAlign: TextAlign.center,
+                      ),
+                      action: SnackBarAction(
+                          textColor: darkColor,
+                          label: "Kapat",
+                          onPressed: () {}),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }
                 },
               ),
@@ -181,6 +197,18 @@ class _CategoryDetailState extends State<CategoryDetail> {
                     setState(() {
                       index++;
                     });
+                  } else {
+                    final snackBar = SnackBar(
+                      content: const Text(
+                        'Son Kelimedesiniz',
+                        textAlign: TextAlign.center,
+                      ),
+                      action: SnackBarAction(
+                          textColor: darkColor,
+                          label: "Kapat",
+                          onPressed: () {}),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   }
                 },
               ),
@@ -193,10 +221,10 @@ class _CategoryDetailState extends State<CategoryDetail> {
   }
 }
 
-List<CategoryData> getData() {
+List<CategoryData> getData(int categoryIndex) {
   late List<CategoryData> tempAllData = [];
 
-  for (var item in Strings.DATA) {
+  for (var item in Strings.DATA[categoryIndex]) {
     CategoryData temp = CategoryData.fromMap(item);
     tempAllData.add(temp);
   }

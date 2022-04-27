@@ -5,9 +5,13 @@ import 'package:flutter/material.dart';
 class CategoryWidget extends StatelessWidget {
   final String categoryName;
   final String categoryPhoto;
+  final int categoryIndex;
 
   const CategoryWidget(
-      {Key? key, required this.categoryName, required this.categoryPhoto})
+      {Key? key,
+      required this.categoryName,
+      required this.categoryPhoto,
+      required this.categoryIndex})
       : super(key: key);
 
   @override
@@ -19,6 +23,7 @@ class CategoryWidget extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => CategoryDetail(
+                categoryIndex: categoryIndex,
                 categoryPhoto: categoryPhoto,
                 categoryName: categoryName,
               ),

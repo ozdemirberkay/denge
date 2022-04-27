@@ -21,6 +21,7 @@ class HomePage extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(12.0),
           child: CategoryWidget(
+            categoryIndex: index,
             categoryName: allCategories[index].categoryName,
             categoryPhoto: allCategories[index].categoryPhoto,
           ),
