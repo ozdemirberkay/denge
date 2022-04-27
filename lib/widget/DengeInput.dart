@@ -7,6 +7,7 @@ class DengeInput extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final IconData suffixIcon;
+  final String? Function(String?)? validator;
 
   const DengeInput(
       {Key? key,
@@ -14,7 +15,8 @@ class DengeInput extends StatefulWidget {
       required this.controller,
       this.keyboardType = TextInputType.text,
       this.obscureText = false,
-      required this.suffixIcon})
+      required this.suffixIcon,
+      this.validator})
       : super(key: key);
 
   @override
@@ -28,6 +30,7 @@ class _DengeInputState extends State<DengeInput> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: TextFormField(
         keyboardType: TextInputType.text,
+        validator: widget.validator,
         controller: widget.controller,
         obscureText: widget.obscureText,
         decoration: InputDecoration(

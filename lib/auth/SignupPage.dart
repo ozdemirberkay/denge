@@ -104,10 +104,15 @@ class _SignupPageState extends State<SignupPage> {
                         labelText: "İsim Soyisim",
                         controller: _nameController,
                         suffixIcon: Icons.person,
+                        validator: (value) {
+                          if (value!.length < 3) {
+                            return "İsminiz 3 harften kısa olamaz";
+                          }
+                        },
                       ),
                       const SizedBox(height: 20),
                       DengeInput(
-                        labelText: "E-mail",
+                        labelText: "Email",
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: Icons.email,

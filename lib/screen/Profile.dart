@@ -75,7 +75,7 @@ class _ProfileState extends State<Profile> {
         ),
         const SizedBox(height: 20),
         DengeInput(
-          labelText: "E-mail",
+          labelText: "Email",
           controller: _emailController,
           keyboardType: TextInputType.emailAddress,
           suffixIcon: Icons.email,
