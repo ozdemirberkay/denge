@@ -3,6 +3,7 @@ import 'package:denge/auth/SignupPage.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeInput.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -31,6 +32,14 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    String validateName(String value) {
+      if (value.length == 0) {
+        return "Name is Required";
+      } else {
+        return "tamam kardeş";
+      }
+    }
+
     return Scaffold(
       backgroundColor: darkColor,
       appBar: AppBar(
@@ -65,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Align(
         alignment: Alignment.bottomCenter,
         child: Form(
+          autovalidateMode: AutovalidateMode.always,
           child: SingleChildScrollView(
             reverse: false,
             child: Column(
@@ -99,6 +109,14 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: Icons.email,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Email Giriniz";
+                          } else if (EmailValidator.validate(value)) {
+                            return "Geçerli Bir Email Giriniz";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
                       DengeInput(
@@ -114,11 +132,11 @@ class _LoginPageState extends State<LoginPage> {
                           child: DengeButton(
                             label: "Giriş Yap",
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          const DashboardScreen())));
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: ((context) =>
+                              //             const DashboardScreen())));
                             },
                           )),
                       const SizedBox(height: 20),

@@ -7,8 +7,7 @@ class DengeInput extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final IconData suffixIcon;
-  final String? Function(String?)? validator;
-
+  final FormFieldValidator<String>? validator;
   const DengeInput(
       {Key? key,
       this.labelText,

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denge/DashboardScreen.dart';
 import 'package:denge/auth/LoginPage.dart';
 import 'package:denge/utils/appColors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../widget/DengeButton.dart';
@@ -18,7 +20,8 @@ class _SignupPageState extends State<SignupPage> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   late TextEditingController _passwordAgainController;
-
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
   @override
   void initState() {
     super.initState();
@@ -137,12 +140,19 @@ class _SignupPageState extends State<SignupPage> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: DengeButton(
                             label: "Kayıt Ol",
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          const DashboardScreen())));
+                            onPressed: () async {
+                              await auth
+                                  .createUserWithEmailAndPassword(
+                                    email: _emailController.text,
+                                    password: _passwordController.text,
+                                  )
+                                  .then((value) => print(value.toString()));
+
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: ((context) =>
+                              //             const DashboardScreen())));
                             },
                           )),
                       const SizedBox(height: 20),
