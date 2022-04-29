@@ -4,6 +4,7 @@ import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeInput.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,11 +17,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    _emailController = TextEditingController(text: "berk@ay.com");
+    _passwordController = TextEditingController(text: "12345678");
   }
 
   @override
@@ -32,13 +35,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    String validateName(String value) {
-      if (value.length == 0) {
-        return "Name is Required";
-      } else {
-        return "tamam kardeş";
-      }
-    }
+    final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
       backgroundColor: darkColor,
@@ -74,7 +71,8 @@ class _LoginPageState extends State<LoginPage> {
       body: Align(
         alignment: Alignment.bottomCenter,
         child: Form(
-          autovalidateMode: AutovalidateMode.always,
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: SingleChildScrollView(
             reverse: false,
             child: Column(
@@ -112,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                         validator: (value) {
                           if (value!.isEmpty) {
                             return "Email Giriniz";
-                          } else if (EmailValidator.validate(value)) {
+                          } else if (!EmailValidator.validate(value)) {
                             return "Geçerli Bir Email Giriniz";
                           }
                           return null;
@@ -124,6 +122,14 @@ class _LoginPageState extends State<LoginPage> {
                         controller: _passwordController,
                         obscureText: true,
                         suffixIcon: Icons.lock,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Şifre Giriniz";
+                          } else if (value.length < 8) {
+                            return "Şifreniz 8 Karakterden az Olamaz";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
                       Container(
@@ -132,6 +138,35 @@ class _LoginPageState extends State<LoginPage> {
                           child: DengeButton(
                             label: "Giriş Yap",
                             onPressed: () {
+                              bool _validate =
+                                  _formKey.currentState!.validate();
+                              if (_validate) {
+                                auth
+                                    .signInWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                )
+                                    .then((value) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              const DashboardScreen())));
+                                }).onError((error, stackTrace) {
+                                  final snackBar = SnackBar(
+                                    content: Text(
+                                      error.toString(),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    action: SnackBarAction(
+                                        textColor: darkColor,
+                                        label: "Kapat",
+                                        onPressed: () {}),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                });
+                              }
                               // Navigator.push(
                               //     context,
                               //     MaterialPageRoute(

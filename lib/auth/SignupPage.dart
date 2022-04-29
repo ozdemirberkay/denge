@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denge/DashboardScreen.dart';
 import 'package:denge/auth/LoginPage.dart';
 import 'package:denge/utils/appColors.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +43,8 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       backgroundColor: darkColor,
       appBar: AppBar(
@@ -76,6 +79,8 @@ class _SignupPageState extends State<SignupPage> {
       body: Align(
         alignment: Alignment.bottomCenter,
         child: Form(
+          key: _formKey,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           child: SingleChildScrollView(
             reverse: false,
             child: Column(
@@ -109,8 +114,9 @@ class _SignupPageState extends State<SignupPage> {
                         suffixIcon: Icons.person,
                         validator: (value) {
                           if (value!.length < 3) {
-                            return "İsminiz 3 harften kısa olamaz";
+                            return "İsim ve Soyisminiz 3 karakterden kısa olamaz";
                           }
+                          return null;
                         },
                       ),
                       const SizedBox(height: 20),
@@ -119,6 +125,14 @@ class _SignupPageState extends State<SignupPage> {
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         suffixIcon: Icons.email,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Email Giriniz";
+                          } else if (!EmailValidator.validate(value)) {
+                            return "Geçerli Bir Email Giriniz";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
                       DengeInput(
@@ -126,6 +140,14 @@ class _SignupPageState extends State<SignupPage> {
                         controller: _passwordController,
                         obscureText: true,
                         suffixIcon: Icons.lock,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Şifre Giriniz";
+                          } else if (value.length < 8) {
+                            return "Şifreniz 8 Karakterden az Olamaz";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
                       DengeInput(
@@ -133,6 +155,16 @@ class _SignupPageState extends State<SignupPage> {
                         controller: _passwordAgainController,
                         obscureText: true,
                         suffixIcon: Icons.lock,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return "Şifre Giriniz";
+                          } else if (value.length < 8) {
+                            return "Şifreniz 8 Karakterden az Olamaz";
+                          } else if (value != _passwordController.text) {
+                            return "Şifreler Aynı Değil";
+                          }
+                          return null;
+                        },
                       ),
                       const SizedBox(height: 20),
                       Container(
@@ -141,18 +173,35 @@ class _SignupPageState extends State<SignupPage> {
                           child: DengeButton(
                             label: "Kayıt Ol",
                             onPressed: () async {
-                              await auth
-                                  .createUserWithEmailAndPassword(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                  )
-                                  .then((value) => print(value.toString()));
-
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: ((context) =>
-                              //             const DashboardScreen())));
+                              bool _validate =
+                                  _formKey.currentState!.validate();
+                              if (_validate) {
+                                await auth
+                                    .createUserWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text,
+                                )
+                                    .then((value) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) =>
+                                              const DashboardScreen())));
+                                }).onError((error, stackTrace) {
+                                  final snackBar = SnackBar(
+                                    content: Text(
+                                      error.toString(),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    action: SnackBarAction(
+                                        textColor: darkColor,
+                                        label: "Kapat",
+                                        onPressed: () {}),
+                                  );
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                });
+                              }
                             },
                           )),
                       const SizedBox(height: 20),

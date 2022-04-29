@@ -29,7 +29,7 @@ class _AchievementsState extends State<Achievements> {
         const SizedBox(height: 10),
         Container(
           margin: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.height / 10),
+              horizontal: MediaQuery.of(context).size.width / 5),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: const Image(
