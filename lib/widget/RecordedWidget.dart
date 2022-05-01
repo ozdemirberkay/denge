@@ -4,8 +4,12 @@ import 'package:flutter/material.dart';
 class RecordedWidget extends StatelessWidget {
   final String englishWord;
   final String turkishWord;
+  final VoidCallback? onPressed;
   const RecordedWidget(
-      {Key? key, required this.englishWord, required this.turkishWord})
+      {Key? key,
+      required this.englishWord,
+      required this.turkishWord,
+      this.onPressed})
       : super(key: key);
 
   @override
@@ -49,9 +53,9 @@ class RecordedWidget extends StatelessWidget {
           FloatingActionButton.small(
             elevation: 0,
             backgroundColor: lightColor,
-            onPressed: () {},
+            onPressed: onPressed,
             child: const Icon(
-              Icons.bookmark,
+              Icons.bookmark_remove,
               color: darkColor,
             ),
           ),

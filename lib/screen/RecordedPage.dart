@@ -1,6 +1,9 @@
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/RecordedWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+
+import '../model/word_model.dart';
 
 class RecordedPage extends StatefulWidget {
   const RecordedPage({Key? key}) : super(key: key);
@@ -10,9 +13,12 @@ class RecordedPage extends StatefulWidget {
 }
 
 class _RecordedPageState extends State<RecordedPage> {
-  List<String> deneme = ["aaaaaAA", "bb", "Cccccccccc", "ddddddd", "e", "xxxx"];
+  var box = Hive.box<DengeWord>("word");
+
   @override
   Widget build(BuildContext context) {
+    List<DengeWord> recordedList = getCustomWord();
+
     return Column(
       children: [
         const SizedBox(height: 5),
@@ -43,11 +49,19 @@ class _RecordedPageState extends State<RecordedPage> {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: 5,
+            itemCount: recordedList.length,
             itemBuilder: (context, index) {
               return RecordedWidget(
-                turkishWord: deneme[index],
-                englishWord: deneme[index + 1],
+                turkishWord: recordedList[index].turkish,
+                englishWord: recordedList[index].english,
+                onPressed: () {
+                  DengeWord word = DengeWord(
+                      recordedList[index].turkish, recordedList[index].english);
+
+                  setState(() {
+                    hiveDeleteData(word);
+                  });
+                },
               );
             },
           ),
@@ -66,14 +80,33 @@ class _RecordedPageState extends State<RecordedPage> {
           ),
           decoration: BoxDecoration(
               color: darkColor, borderRadius: BorderRadius.circular(8)),
-          child: const Text(
-            "Kaydedilen Kelime Sayısı : 5",
+          child: Text(
+            "Kaydedilen Kelime Sayısı : " + box.length.toString(),
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 color: lightColor, fontWeight: FontWeight.bold, fontSize: 20),
           ),
         ),
       ],
     );
+  }
+
+  void hiveDeleteData(DengeWord dengeWord) {
+    int i = 0;
+    for (var element in box.values) {
+      if (dengeWord.english == element.english &&
+          dengeWord.turkish == element.turkish) {
+        box.deleteAt(i);
+      }
+      i++;
+    }
+  }
+
+  List<DengeWord> getCustomWord() {
+    List<DengeWord> tempList = [];
+    for (var element in box.values) {
+      tempList.add(element);
+    }
+    return tempList;
   }
 }

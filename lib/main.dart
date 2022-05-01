@@ -1,7 +1,10 @@
 import 'package:denge/auth/InitScreen.dart';
+import 'package:denge/model/word_model.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firebase_options.dart';
 
@@ -10,6 +13,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Hive.initFlutter("dengewords");
+  Hive.registerAdapter(DengeWordAdapter());
+  await Hive.openBox<DengeWord>("word");
   runApp(const MyApp());
 }
 

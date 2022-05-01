@@ -1,7 +1,9 @@
 import 'package:denge/data/strings.dart';
+import 'package:denge/model/word_model.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 import '../model/category_data.dart';
 
@@ -26,6 +28,8 @@ class CategoryDetail extends StatefulWidget {
 
 class _CategoryDetailState extends State<CategoryDetail> {
   int index = 0;
+  var box = Hive.box<DengeWord>("word");
+
   @override
   Widget build(BuildContext context) {
     String imagePath = "assets/images/${widget.categoryPhoto}";
@@ -79,9 +83,22 @@ class _CategoryDetailState extends State<CategoryDetail> {
                   FloatingActionButton.small(
                     elevation: 0,
                     backgroundColor: lightColor,
-                    onPressed: () {},
-                    child: const Icon(
-                      Icons.bookmark,
+                    onPressed: () {
+                      DengeWord word = DengeWord(
+                          widget.allData[index].ingilizce,
+                          widget.allData[index].turkce);
+                      setState(() {
+                        hiveContainsData(word)
+                            ? hiveDeleteData(word)
+                            : box.add(word);
+                      });
+                    },
+                    child: Icon(
+                      hiveContainsData(DengeWord(
+                              widget.allData[index].ingilizce,
+                              widget.allData[index].turkce))
+                          ? Icons.bookmark_remove
+                          : Icons.bookmark_add,
                       color: darkColor,
                     ),
                   ),
@@ -218,6 +235,28 @@ class _CategoryDetailState extends State<CategoryDetail> {
         ],
       ),
     );
+  }
+
+  bool hiveContainsData(DengeWord dengeWord) {
+    for (var element in box.values) {
+      if (dengeWord.english == element.english &&
+          dengeWord.turkish == element.turkish) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  void hiveDeleteData(DengeWord dengeWord) {
+    int i = 0;
+    for (var element in box.values) {
+      if (dengeWord.english == element.english &&
+          dengeWord.turkish == element.turkish) {
+        box.deleteAt(i);
+        print("***************");
+      }
+      i++;
+    }
   }
 }
 
