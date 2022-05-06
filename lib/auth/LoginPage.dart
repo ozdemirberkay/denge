@@ -1,5 +1,6 @@
 import 'package:denge/DashboardScreen.dart';
 import 'package:denge/auth/SignupPage.dart';
+import 'package:denge/model/user_model.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeInput.dart';
@@ -24,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     super.initState();
     _emailController = TextEditingController(text: "berk@ay.com");
-    _passwordController = TextEditingController(text: "12345678");
+    _passwordController = TextEditingController(text: "11111111");
   }
 
   @override
@@ -150,6 +151,7 @@ class _LoginPageState extends State<LoginPage> {
                                     .then((value) async {
                                   SharedPreferences prefs =
                                       await SharedPreferences.getInstance();
+
                                   await prefs.setString(
                                       'token', value.user!.uid);
                                   Navigator.push(

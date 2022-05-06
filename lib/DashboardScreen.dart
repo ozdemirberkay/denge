@@ -4,7 +4,6 @@ import 'package:denge/QuizPage.dart';
 import 'package:denge/screen/Achievements.dart';
 import 'package:denge/screen/Profile.dart';
 import 'package:denge/screen/RecordedPage.dart';
-import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,7 +20,24 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int selectedIndex = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  late SharedPreferences prefs;
+  String name = "";
+  Future<String> getName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    name = firestore
+        .collection("user")
+        .doc(prefs.getString("token"))
+        .get()
+        .toString();
+    return name;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getName();
+    setState(() {});
+  }
+
   List<String> label = ["Kategoriler", "Quizler", "Kaydedilenler"];
   renderWidget() {
     if (selectedIndex == 0) {
@@ -32,13 +48,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
       return const RecordedPage();
     }
     return Container();
-  }
-
-  @override
-  Future<void> initState() async {
-    // TODO: implement initState
-    super.initState();
-    prefs = await SharedPreferences.getInstance();
   }
 
   @override
@@ -66,14 +75,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       radius: 60,
                       backgroundColor: lightColor,
                     )),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
-                      firestore
-                          .collection("users")
-                          .doc(prefs.getString('token'))
-                          .collection("nameSurname")
-                          .toString(),
-                      //   "Berkay Özdemir",
+                      name,
                       style: const TextStyle(color: lightColor, fontSize: 18),
                     ),
                   ],
