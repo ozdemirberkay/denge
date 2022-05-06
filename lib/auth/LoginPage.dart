@@ -6,6 +6,7 @@ import 'package:denge/widget/DengeInput.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -146,7 +147,11 @@ class _LoginPageState extends State<LoginPage> {
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                 )
-                                    .then((value) {
+                                    .then((value) async {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.setString(
+                                      'token', value.user!.uid);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

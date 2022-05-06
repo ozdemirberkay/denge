@@ -5,6 +5,7 @@ import 'package:denge/utils/appColors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/DengeButton.dart';
 import '../widget/DengeInput.dart';
@@ -181,7 +182,20 @@ class _SignupPageState extends State<SignupPage> {
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                 )
-                                    .then((value) {
+                                    .then((value) async {
+                                  Map<String, dynamic> userMap = {
+                                    "nameSurname": _nameController.text,
+                                  };
+                                  await firestore
+                                      .collection("users")
+                                      .doc(value.user!.uid)
+                                      .set(userMap);
+
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.setString(
+                                      'token', value.user!.uid);
+
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

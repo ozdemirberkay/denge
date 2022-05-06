@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denge/HomePage.dart';
 import 'package:denge/QuizPage.dart';
 import 'package:denge/screen/Achievements.dart';
@@ -6,6 +7,7 @@ import 'package:denge/screen/RecordedPage.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'utils/appColors.dart';
 
@@ -18,6 +20,8 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int selectedIndex = 0;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  late SharedPreferences prefs;
   List<String> label = ["Kategoriler", "Quizler", "Kaydedilenler"];
   renderWidget() {
     if (selectedIndex == 0) {
@@ -31,8 +35,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   @override
+  Future<void> initState() async {
+    // TODO: implement initState
+    super.initState();
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
     return Scaffold(
       key: _scaffoldKey,
       backgroundColor: lightColor,
@@ -48,16 +60,21 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   color: darkColor,
                 ),
                 child: Column(
-                  children: const [
-                    Expanded(
+                  children: [
+                    const Expanded(
                         child: CircleAvatar(
                       radius: 60,
                       backgroundColor: lightColor,
                     )),
                     SizedBox(height: 5),
                     Text(
-                      "Berkay Özdemir",
-                      style: TextStyle(color: lightColor, fontSize: 18),
+                      firestore
+                          .collection("users")
+                          .doc(prefs.getString('token'))
+                          .collection("nameSurname")
+                          .toString(),
+                      //   "Berkay Özdemir",
+                      style: const TextStyle(color: lightColor, fontSize: 18),
                     ),
                   ],
                 ),
