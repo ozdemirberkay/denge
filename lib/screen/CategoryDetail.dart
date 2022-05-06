@@ -85,8 +85,9 @@ class _CategoryDetailState extends State<CategoryDetail> {
                     backgroundColor: lightColor,
                     onPressed: () {
                       DengeWord word = DengeWord(
-                          widget.allData[index].ingilizce,
-                          widget.allData[index].turkce);
+                        widget.allData[index].turkce,
+                        widget.allData[index].ingilizce,
+                      );
                       setState(() {
                         hiveContainsData(word)
                             ? hiveDeleteData(word)
@@ -94,9 +95,12 @@ class _CategoryDetailState extends State<CategoryDetail> {
                       });
                     },
                     child: Icon(
-                      hiveContainsData(DengeWord(
-                              widget.allData[index].ingilizce,
-                              widget.allData[index].turkce))
+                      hiveContainsData(
+                        DengeWord(
+                          widget.allData[index].turkce,
+                          widget.allData[index].ingilizce,
+                        ),
+                      )
                           ? Icons.bookmark_remove
                           : Icons.bookmark_add,
                       color: darkColor,
@@ -253,7 +257,6 @@ class _CategoryDetailState extends State<CategoryDetail> {
       if (dengeWord.english == element.english &&
           dengeWord.turkish == element.turkish) {
         box.deleteAt(i);
-        print("***************");
       }
       i++;
     }
