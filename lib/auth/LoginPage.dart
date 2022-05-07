@@ -1,6 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denge/DashboardScreen.dart';
 import 'package:denge/auth/SignupPage.dart';
-import 'package:denge/model/user_model.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:denge/widget/DengeInput.dart';
@@ -20,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController _emailController;
   late TextEditingController _passwordController;
   FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -154,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
 
                                   await prefs.setString(
                                       'token', value.user!.uid);
+
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

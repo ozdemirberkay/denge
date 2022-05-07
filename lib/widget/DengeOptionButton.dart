@@ -2,7 +2,7 @@ import 'package:denge/utils/appColors.dart';
 import 'package:flutter/material.dart';
 
 class DengeOptionButton extends StatefulWidget {
-  final String optiyon;
+  final String option;
   final String correctAnswer;
 
   Color color;
@@ -10,7 +10,7 @@ class DengeOptionButton extends StatefulWidget {
 
   DengeOptionButton({
     Key? key,
-    required this.optiyon,
+    required this.option,
     required this.correctAnswer,
     this.color = lightColor,
     this.backgroundColor = darkColor,
@@ -34,7 +34,7 @@ class _DengeOptionButtonState extends State<DengeOptionButton> {
             ),
           ),
           onPressed: () {
-            if (widget.optiyon == widget.correctAnswer) {
+            if (widget.option == widget.correctAnswer) {
               setState(() {
                 widget.color = Colors.green;
                 widget.backgroundColor = const Color(0xffC9F4DE);
@@ -49,7 +49,7 @@ class _DengeOptionButtonState extends State<DengeOptionButton> {
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 6),
             child: Text(
-              widget.optiyon,
+              widget.option,
               style: TextStyle(color: widget.color, fontSize: 17),
             ),
           )),

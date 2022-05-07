@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:denge/model/question_model.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeOptionButton.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
@@ -11,7 +13,15 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<String> butunsecenekler = ["elma", "armut", "deneme", "ali", "veli"];
+  List<Question> allQuestion = [];
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  int index = 0;
+
+  @override
+  void initState() {
+    getQuizQuestion();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,20 +35,52 @@ class _QuizPageState extends State<QuizPage> {
               label: "Önceki Soru",
               icon: Icons.arrow_back,
               reverse: true,
-              onPressed: () {},
+              onPressed: () {
+                if (index > 0) {
+                  setState(() {
+                    index--;
+                  });
+                } else {
+                  final snackBar = SnackBar(
+                    content: const Text(
+                      'İlk Sorudasınız',
+                      textAlign: TextAlign.center,
+                    ),
+                    action: SnackBarAction(
+                        textColor: darkColor, label: "Kapat", onPressed: () {}),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
             ),
             DengeOutlinedButton(
               label: "Sonraki Soru",
               icon: Icons.arrow_forward,
-              onPressed: () {},
+              onPressed: () {
+                if (index < allQuestion.length - 1) {
+                  setState(() {
+                    index++;
+                  });
+                } else {
+                  final snackBar = SnackBar(
+                    content: const Text(
+                      'Son Sorudasınız',
+                      textAlign: TextAlign.center,
+                    ),
+                    action: SnackBarAction(
+                        textColor: darkColor, label: "Kapat", onPressed: () {}),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+              },
             ),
           ],
         ),
         Expanded(child: Container()),
-        const Text(
-          "SNAKE",
+        Text(
+          allQuestion[index].question,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               color: darkColor, fontWeight: FontWeight.bold, fontSize: 36),
         ),
         const SizedBox(height: 20),
@@ -62,11 +104,21 @@ class _QuizPageState extends State<QuizPage> {
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
             const SizedBox(height: 20),
-            DengeOptionButton(optiyon: "aa", correctAnswer: "aa"),
-            DengeOptionButton(optiyon: "ava", correctAnswer: "asa"),
-            DengeOptionButton(optiyon: "axa", correctAnswer: "aaa"),
-            DengeOptionButton(optiyon: "aaaa", correctAnswer: "xaa"),
-            DengeOptionButton(optiyon: "wwaa", correctAnswer: "asa"),
+            DengeOptionButton(
+                option: allQuestion[index].answer1,
+                correctAnswer: allQuestion[index].correctAnswer),
+            DengeOptionButton(
+                option: allQuestion[index].answer2,
+                correctAnswer: allQuestion[index].correctAnswer),
+            DengeOptionButton(
+                option: allQuestion[index].answer3,
+                correctAnswer: allQuestion[index].correctAnswer),
+            DengeOptionButton(
+                option: allQuestion[index].answer4,
+                correctAnswer: allQuestion[index].correctAnswer),
+            DengeOptionButton(
+                option: allQuestion[index].answer5,
+                correctAnswer: allQuestion[index].correctAnswer),
             const SizedBox(height: 20),
           ]),
           //     Expanded(
@@ -82,5 +134,23 @@ class _QuizPageState extends State<QuizPage> {
         )
       ],
     );
+  }
+
+  Future<void> getQuizQuestion() async {
+    var _questionDoc = await firestore.collection("questions").get();
+    for (var item in _questionDoc.docs) {
+      Map userMap = item.data();
+      Question temp = Question(
+        userMap["question"],
+        userMap["answer1"],
+        userMap["answer2"],
+        userMap["answer3"],
+        userMap["answer4"],
+        userMap["answer5"],
+        userMap["correctAnswer"],
+      );
+      allQuestion.add(temp);
+    }
+    print(allQuestion.length.toString());
   }
 }
