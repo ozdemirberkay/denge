@@ -129,6 +129,8 @@ class _QuizPageState extends State<QuizPage> {
                           onPressed: isDisable
                               ? null
                               : () {
+                                  print("a");
+
                                   setState(() {
                                     isDisable = true;
                                   });
@@ -137,46 +139,18 @@ class _QuizPageState extends State<QuizPage> {
                         DengeOptionButton(
                           option: allQuestion[index].answer2,
                           correctAnswer: allQuestion[index].correctAnswer,
-                          onPressed: isDisable
-                              ? null
-                              : () {
-                                  setState(() {
-                                    isDisable = true;
-                                  });
-                                },
                         ),
                         DengeOptionButton(
                           option: allQuestion[index].answer3,
                           correctAnswer: allQuestion[index].correctAnswer,
-                          onPressed: isDisable
-                              ? null
-                              : () {
-                                  setState(() {
-                                    isDisable = true;
-                                  });
-                                },
                         ),
                         DengeOptionButton(
                           option: allQuestion[index].answer4,
                           correctAnswer: allQuestion[index].correctAnswer,
-                          onPressed: isDisable
-                              ? null
-                              : () {
-                                  setState(() {
-                                    isDisable = true;
-                                  });
-                                },
                         ),
                         DengeOptionButton(
                           option: allQuestion[index].answer5,
                           correctAnswer: allQuestion[index].correctAnswer,
-                          onPressed: isDisable
-                              ? null
-                              : () {
-                                  setState(() {
-                                    isDisable = true;
-                                  });
-                                },
                         ),
                         const SizedBox(height: 20),
                       ]),
