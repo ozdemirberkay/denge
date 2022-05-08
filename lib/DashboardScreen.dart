@@ -3,12 +3,10 @@ import 'package:denge/HomePage.dart';
 import 'package:denge/QuizPage.dart';
 import 'package:denge/auth/LoginPage.dart';
 import 'package:denge/screen/Achievements.dart';
-import 'package:denge/screen/Profile.dart';
 import 'package:denge/screen/RecordedPage.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'utils/appColors.dart';
 
@@ -25,21 +23,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int selectedIndex = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   String name = "";
-  Future<String> getName() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    name = firestore
-        .collection("user")
-        .doc(prefs.getString("token"))
-        .get()
-        .toString();
-    return name;
+
+  Future<void> getName() async {
+    var snapshot =
+        await firestore.collection("users").doc(auth.currentUser!.uid).get();
+    Map<String, dynamic>? dataMap = snapshot.data();
+
+    name = dataMap!["nameSurname"];
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
     getName();
-    setState(() {});
   }
 
   List<String> label = ["Kategoriler", "Quizler", "Kaydedilenler"];
@@ -151,10 +148,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         TextButton(
                           onPressed: () async {
                             await auth.signOut().then((value) async {
-                              SharedPreferences prefs =
-                                  await SharedPreferences.getInstance();
-
-                              await prefs.setBool("loggedIn", false);
                               Navigator.of(context).pushAndRemoveUntil(
                                   MaterialPageRoute(
                                     builder: (context) => const LoginPage(),

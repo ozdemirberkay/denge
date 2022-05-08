@@ -150,11 +150,6 @@ class _LoginPageState extends State<LoginPage> {
                                   password: _passwordController.text,
                                 )
                                     .then((value) async {
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-
-                                  await prefs.setBool("loggedIn", true);
-
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

@@ -23,116 +23,368 @@ class Strings {
 
   static const List<Map<String, String>> esyalar = [
     {
-      "turkce": "123",
-      "ingilizce": "4214",
+      "turkce": "Kitaplık",
+      "ingilizce": "Bookshelf",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Çalışma Masası",
+      "ingilizce": "Desk",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Hamak",
+      "ingilizce": "Hammock",
+    },
+    {
+      "turkce": "Sandalye",
+      "ingilizce": "Chair",
+    },
+    {
+      "turkce": "Bank",
+      "ingilizce": "Bench",
+    },
+    {
+      "turkce": "Lavabo",
+      "ingilizce": "Sink",
+    },
+    {
+      "turkce": "Havlu",
+      "ingilizce": "Towel",
+    },
+    {
+      "turkce": "Musluk",
+      "ingilizce": "Faucet",
     },
   ];
 
   static const List<Map<String, String>> mevsimler = [
     {
-      "turkce": "DenemeTr",
-      "ingilizce": "DenemeIng",
+      "turkce": "Yaz",
+      "ingilizce": "Summer",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Sonbahar",
+      "ingilizce": "Autumn",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Kış",
+      "ingilizce": "Winter",
+    },
+    {
+      "turkce": "İlkbahar",
+      "ingilizce": "Spring",
     },
   ];
   static const List<Map<String, String>> hayvanlar = [
     {
-      "turkce": "DenemeTr",
-      "ingilizce": "DenemeIng",
+      "turkce": "Köpek",
+      "ingilizce": "Dog",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Kaplumbağa",
+      "ingilizce": "Turtle",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Tavşan",
+      "ingilizce": "Rabbit",
+    },
+    {
+      "turkce": "Kedi",
+      "ingilizce": "Cat",
+    },
+    {
+      "turkce": "Fare",
+      "ingilizce": "Mouse",
+    },
+    {
+      "turkce": "Kuş",
+      "ingilizce": "Bird",
+    },
+    {
+      "turkce": "Güvercin",
+      "ingilizce": "Pigeon",
+    },
+    {
+      "turkce": "At",
+      "ingilizce": "Horse",
+    },
+    {
+      "turkce": "Arı",
+      "ingilizce": "Bee",
+    },
+    {
+      "turkce": "Yengeç",
+      "ingilizce": "Crab",
+    },
+    {
+      "turkce": "Hindi",
+      "ingilizce": "Turkey",
+    },
+    {
+      "turkce": "Tavuk",
+      "ingilizce": "Chicken",
     },
   ];
   static const List<Map<String, String>> sporlar = [
     {
-      "turkce": "DenemeTr",
-      "ingilizce": "DenemeIng",
+      "turkce": "Basketbol",
+      "ingilizce": "Basketball",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Okçuluk",
+      "ingilizce": "Archery",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Beyzbol",
+      "ingilizce": "Baseball",
+    },
+    {
+      "turkce": "Maraton",
+      "ingilizce": "Marathon",
+    },
+    {
+      "turkce": "Futbol",
+      "ingilizce": "Football",
+    },
+    {
+      "turkce": "Bisiklet Sürmek",
+      "ingilizce": "Cycling",
+    },
+    {
+      "turkce": "Yüzme",
+      "ingilizce": "Swimming",
+    },
+    {
+      "turkce": "Tenis",
+      "ingilizce": "Tennis",
+    },
+    {
+      "turkce": "Kayak",
+      "ingilizce": "Skiing",
+    },
+    {
+      "turkce": "Hentbol",
+      "ingilizce": "Handball",
+    },
+    {
+      "turkce": "Sörf",
+      "ingilizce": "Surfing",
     },
   ];
   static const List<Map<String, String>> meslekler = [
     {
-      "turkce": "DenemeTr",
-      "ingilizce": "DenemeIng",
+      "turkce": "Muhasebeci",
+      "ingilizce": "Accountant",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Yönetici",
+      "ingilizce": "Administrator",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Simyacı",
+      "ingilizce": "Alchemist",
+    },
+    {
+      "turkce": "Yazar",
+      "ingilizce": "Author",
+    },
+    {
+      "turkce": "Temizlikçi",
+      "ingilizce": "Cleaner",
+    },
+    {
+      "turkce": "Mühendis",
+      "ingilizce": "Engineer",
+    },
+    {
+      "turkce": "Çiftçi",
+      "ingilizce": "Farmer",
+    },
+    {
+      "turkce": "Çiçekçi",
+      "ingilizce": "Florist",
+    },
+    {
+      "turkce": "Avcı",
+      "ingilizce": "Hunter",
+    },
+    {
+      "turkce": "Gazeteci",
+      "ingilizce": "Journalist",
+    },
+    {
+      "turkce": "Stajyer",
+      "ingilizce": "Intern",
+    },
+    {
+      "turkce": "Lawyer",
+      "ingilizce": "Avukat",
+    },
+    {
+      "turkce": "Yargıç",
+      "ingilizce": "Judge",
+    },
+    {
+      "turkce": "Tamirci",
+      "ingilizce": "Mechanic",
+    },
+    {
+      "turkce": "Madenci",
+      "ingilizce": "Miner",
+    },
+    {
+      "turkce": "Muhafız",
+      "ingilizce": "Guard",
+    },
+    {
+      "turkce": "Müzisyen",
+      "ingilizce": "Musician",
+    },
+    {
+      "turkce": "Bakan",
+      "ingilizce": "Minister",
+    },
+    {
+      "turkce": "Ressam",
+      "ingilizce": "Painter",
+    },
+    {
+      "turkce": "Eczacı",
+      "ingilizce": "Pharmacist",
+    },
+    {
+      "turkce": "Hemşire",
+      "ingilizce": "Nurse",
+    },
+    {
+      "turkce": "Ajan",
+      "ingilizce": "Spy",
+    },
+    {
+      "turkce": "Asker",
+      "ingilizce": "Soldier",
+    },
+    {
+      "turkce": "Şarkıcı",
+      "ingilizce": "Singer",
     },
   ];
   static const List<Map<String, String>> aylar = [
     {
-      "turkce": "DenemeTr",
-      "ingilizce": "DenemeIng",
+      "turkce": "Ocak",
+      "ingilizce": "January",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Şubat",
+      "ingilizce": "February",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Mart",
+      "ingilizce": "March",
+    },
+    {
+      "turkce": "Nisan",
+      "ingilizce": "April",
+    },
+    {
+      "turkce": "Mayıs",
+      "ingilizce": "May",
+    },
+    {
+      "turkce": "Haziran",
+      "ingilizce": "June",
+    },
+    {
+      "turkce": "Temmuz",
+      "ingilizce": "July",
+    },
+    {
+      "turkce": "Ağustos",
+      "ingilizce": "August",
+    },
+    {
+      "turkce": "Eylül",
+      "ingilizce": "September",
+    },
+    {
+      "turkce": "Ekim",
+      "ingilizce": "October",
+    },
+    {
+      "turkce": "Kasım",
+      "ingilizce": "November",
+    },
+    {
+      "turkce": "Aralık",
+      "ingilizce": "December",
     },
   ];
   static const List<Map<String, String>> renkler = [
     {
-      "turkce": "DenemeTr",
-      "ingilizce": "DenemeIng",
+      "turkce": "Beyaz",
+      "ingilizce": "White",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Kırmızı",
+      "ingilizce": "Red",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Yeşil",
+      "ingilizce": "Green",
+    },
+    {
+      "turkce": "Mavi",
+      "ingilizce": "Blue",
+    },
+    {
+      "turkce": "Kahverengi",
+      "ingilizce": "Brown",
+    },
+    {
+      "turkce": "Turuncu",
+      "ingilizce": "Orange",
+    },
+    {
+      "turkce": "Mor",
+      "ingilizce": "Purple",
+    },
+    {
+      "turkce": "Siyah",
+      "ingilizce": "Black",
+    },
+    {
+      "turkce": "Gri",
+      "ingilizce": "Grey",
     },
   ];
 
   static const List<Map<String, String>> gunler = [
     {
-      "turkce": "DenemeTr",
-      "ingilizce": "DenemeIng",
+      "turkce": "Pazartesi",
+      "ingilizce": "Monday",
     },
     {
-      "turkce": "denemeiki",
-      "ingilizce": "denemeuc",
+      "turkce": "Salı",
+      "ingilizce": "Tuesday",
     },
     {
-      "turkce": "denemedort",
-      "ingilizce": "denemebes",
+      "turkce": "Çarşamba",
+      "ingilizce": "Wednesday",
+    },
+    {
+      "turkce": "Perşembe",
+      "ingilizce": "Thursday",
+    },
+    {
+      "turkce": "Cuma",
+      "ingilizce": "Friday",
+    },
+    {
+      "turkce": "Cumartesi",
+      "ingilizce": "Saturday",
+    },
+    {
+      "turkce": "Pazar",
+      "ingilizce": "Sunday",
     },
   ];
 

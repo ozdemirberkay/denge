@@ -183,10 +183,6 @@ class _SignupPageState extends State<SignupPage> {
                                   password: _passwordController.text,
                                 )
                                     .then((value) async {
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-
-                                  await prefs.setBool("loggedIn", true);
                                   Map<String, dynamic> userMap = {
                                     "nameSurname": _nameController.text,
                                   };

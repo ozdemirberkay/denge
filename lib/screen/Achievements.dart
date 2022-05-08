@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denge/utils/appColors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -11,6 +13,24 @@ class Achievements extends StatefulWidget {
 
 class _AchievementsState extends State<Achievements> {
   var box = Hive.box("achievements");
+  String name = "";
+  FirebaseAuth auth = FirebaseAuth.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  Future<void> getName() async {
+    var snapshot =
+        await firestore.collection("users").doc(auth.currentUser!.uid).get();
+    Map<String, dynamic>? dataMap = snapshot.data();
+
+    name = dataMap!["nameSurname"];
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getName();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +65,10 @@ class _AchievementsState extends State<Achievements> {
           ),
         ),
         const SizedBox(height: 10),
-        const Text(
-          "Berkay Özdemir",
+        Text(
+          name,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               color: darkColor, fontWeight: FontWeight.bold, fontSize: 25),
         ),
         const SizedBox(height: 20),
@@ -85,8 +105,8 @@ class _AchievementsState extends State<Achievements> {
                 child: Text(
                   correct.toString(),
                   textAlign: TextAlign.center,
-                  style:
-                      TextStyle(color: darkColor, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: darkColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
