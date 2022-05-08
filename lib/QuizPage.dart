@@ -16,6 +16,7 @@ class _QuizPageState extends State<QuizPage> {
   late final Future<List<Question>> allFutureQuestion;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   int index = 0;
+  bool isDisable = false;
 
   @override
   void initState() {
@@ -45,6 +46,7 @@ class _QuizPageState extends State<QuizPage> {
                         if (index > 0) {
                           setState(() {
                             index--;
+                            isDisable = false;
                           });
                         } else {
                           final snackBar = SnackBar(
@@ -68,6 +70,7 @@ class _QuizPageState extends State<QuizPage> {
                         if (index < allQuestion.length - 1) {
                           setState(() {
                             index++;
+                            isDisable = false;
                           });
                         } else {
                           final snackBar = SnackBar(
@@ -121,27 +124,67 @@ class _QuizPageState extends State<QuizPage> {
                       children: [
                         const SizedBox(height: 20),
                         DengeOptionButton(
-                            option: allQuestion[index].answer1,
-                            correctAnswer: allQuestion[index].correctAnswer),
+                          option: allQuestion[index].answer1,
+                          correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable
+                              ? null
+                              : () {
+                                  setState(() {
+                                    isDisable = true;
+                                  });
+                                },
+                        ),
                         DengeOptionButton(
-                            option: allQuestion[index].answer2,
-                            correctAnswer: allQuestion[index].correctAnswer),
+                          option: allQuestion[index].answer2,
+                          correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable
+                              ? null
+                              : () {
+                                  setState(() {
+                                    isDisable = true;
+                                  });
+                                },
+                        ),
                         DengeOptionButton(
-                            option: allQuestion[index].answer3,
-                            correctAnswer: allQuestion[index].correctAnswer),
+                          option: allQuestion[index].answer3,
+                          correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable
+                              ? null
+                              : () {
+                                  setState(() {
+                                    isDisable = true;
+                                  });
+                                },
+                        ),
                         DengeOptionButton(
-                            option: allQuestion[index].answer4,
-                            correctAnswer: allQuestion[index].correctAnswer),
+                          option: allQuestion[index].answer4,
+                          correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable
+                              ? null
+                              : () {
+                                  setState(() {
+                                    isDisable = true;
+                                  });
+                                },
+                        ),
                         DengeOptionButton(
-                            option: allQuestion[index].answer5,
-                            correctAnswer: allQuestion[index].correctAnswer),
+                          option: allQuestion[index].answer5,
+                          correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable
+                              ? null
+                              : () {
+                                  setState(() {
+                                    isDisable = true;
+                                  });
+                                },
+                        ),
                         const SizedBox(height: 20),
                       ]),
                   //     Expanded(
                   //   child: ListView.builder(
                   //     itemBuilder: (context, index) {
                   //       return DengeOptionButton(
-                  //           optiyon: butunsecenekler[index],
+                  //           option: butunsecenekler[index],
                   //           correctAnswer: butunsecenekler[1]);
                   //     },
                   //     itemCount: 5,

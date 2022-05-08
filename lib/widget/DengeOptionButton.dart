@@ -5,7 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 class DengeOptionButton extends StatefulWidget {
   final String option;
   final String correctAnswer;
-
+  final VoidCallback? onPressed;
   Color color;
   Color backgroundColor;
 
@@ -15,6 +15,7 @@ class DengeOptionButton extends StatefulWidget {
     required this.correctAnswer,
     this.color = lightColor,
     this.backgroundColor = darkColor,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -35,23 +36,26 @@ class _DengeOptionButtonState extends State<DengeOptionButton> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          onPressed: () async {
-            int total = box.get("total") ?? 0;
-            await box.put("total", total + 1);
-            if (widget.option == widget.correctAnswer) {
-              int correct = box.get("correct") ?? 0;
-              await box.put("correct", correct + 1);
-              setState(() {
-                widget.color = Colors.green;
-                widget.backgroundColor = const Color(0xffC9F4DE);
-              });
-            } else {
-              setState(() {
-                widget.color = Colors.red;
-                widget.backgroundColor = const Color(0xffEBD6DA);
-              });
-            }
-          },
+          onPressed: widget.onPressed == null
+              ? null
+              : () async {
+                  widget.onPressed!.call();
+                  int total = box.get("total") ?? 0;
+                  await box.put("total", total + 1);
+                  if (widget.option == widget.correctAnswer) {
+                    int correct = box.get("correct") ?? 0;
+                    await box.put("correct", correct + 1);
+                    setState(() {
+                      widget.color = Colors.green;
+                      widget.backgroundColor = const Color(0xffC9F4DE);
+                    });
+                  } else {
+                    setState(() {
+                      widget.color = Colors.red;
+                      widget.backgroundColor = const Color(0xffEBD6DA);
+                    });
+                  }
+                },
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 6),
             child: Text(
