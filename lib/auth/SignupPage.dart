@@ -183,6 +183,10 @@ class _SignupPageState extends State<SignupPage> {
                                   password: _passwordController.text,
                                 )
                                     .then((value) async {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+
+                                  await prefs.setBool("loggedIn", true);
                                   Map<String, dynamic> userMap = {
                                     "nameSurname": _nameController.text,
                                   };
@@ -190,11 +194,6 @@ class _SignupPageState extends State<SignupPage> {
                                       .collection("users")
                                       .doc(value.user!.uid)
                                       .set(userMap);
-
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-                                  await prefs.setString(
-                                      'token', value.user!.uid);
 
                                   Navigator.push(
                                       context,

@@ -4,9 +4,14 @@ import 'package:denge/utils/appColors.dart';
 import 'package:denge/widget/DengeButton.dart';
 import 'package:flutter/material.dart';
 
-class InitScreen extends StatelessWidget {
-  const InitScreen({Key? key}) : super(key: key);
+class FirstPage extends StatefulWidget {
+  const FirstPage({Key? key}) : super(key: key);
 
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

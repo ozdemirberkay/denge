@@ -1,5 +1,6 @@
 import 'package:denge/utils/appColors.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class Achievements extends StatefulWidget {
   const Achievements({Key? key}) : super(key: key);
@@ -9,8 +10,13 @@ class Achievements extends StatefulWidget {
 }
 
 class _AchievementsState extends State<Achievements> {
+  var box = Hive.box("achievements");
+
   @override
   Widget build(BuildContext context) {
+    int correct = box.get("correct");
+    int total = box.get("total");
+
     return Scaffold(
       backgroundColor: lightColor,
       appBar: AppBar(
@@ -76,8 +82,8 @@ class _AchievementsState extends State<Achievements> {
                   color: lightColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text(
-                  "86",
+                child: Text(
+                  correct.toString(),
                   textAlign: TextAlign.center,
                   style:
                       TextStyle(color: darkColor, fontWeight: FontWeight.bold),
@@ -117,11 +123,11 @@ class _AchievementsState extends State<Achievements> {
                   color: lightColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Text(
-                  "86",
+                child: Text(
+                  total.toString(),
                   textAlign: TextAlign.center,
-                  style:
-                      TextStyle(color: darkColor, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: darkColor, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -149,17 +155,17 @@ class _AchievementsState extends State<Achievements> {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       "Başarı Yüzdesi : ",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: darkColor, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "%43",
+                      "% ${((correct / total) * 100).toStringAsFixed(2)}",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: darkColor, fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -168,7 +174,7 @@ class _AchievementsState extends State<Achievements> {
               Slider(
                 activeColor: Colors.green,
                 inactiveColor: lightColor,
-                value: 43,
+                value: ((correct / total) * 100),
                 onChanged: (value) {},
                 min: 0,
                 max: 100,

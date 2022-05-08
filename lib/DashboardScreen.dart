@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denge/HomePage.dart';
 import 'package:denge/QuizPage.dart';
+import 'package:denge/auth/LoginPage.dart';
 import 'package:denge/screen/Achievements.dart';
 import 'package:denge/screen/Profile.dart';
 import 'package:denge/screen/RecordedPage.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +20,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   int selectedIndex = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   String name = "";
@@ -83,23 +87,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ],
                 ),
               ),
-              DengeOutlinedButton(
-                label: "Profil",
-                icon: Icons.person,
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const Profile(),
-                      ));
-                  setState(() {
-                    selectedIndex = 0;
-                  });
-                  if (_scaffoldKey.currentState!.isDrawerOpen) {
-                    _scaffoldKey.currentState!.openEndDrawer();
-                  }
-                },
-              ),
+              // DengeOutlinedButton(
+              //   label: "Profil",
+              //   icon: Icons.person,
+              //   onPressed: () {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => const Profile(),
+              //         ));
+              //     setState(() {
+              //       selectedIndex = 0;
+              //     });
+              //     if (_scaffoldKey.currentState!.isDrawerOpen) {
+              //       _scaffoldKey.currentState!.openEndDrawer();
+              //     }
+              //   },
+              // ),
               DengeOutlinedButton(
                 label: "Kaydedilenler",
                 icon: Icons.bookmark,
@@ -130,7 +134,50 @@ class _DashboardScreenState extends State<DashboardScreen> {
               DengeOutlinedButton(
                 label: "Çıkış Yap",
                 icon: Icons.logout,
-                onPressed: () {},
+                onPressed: () async {
+                  showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      backgroundColor: lightColor,
+                      title: const Text(
+                        "Çıkış Yap",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      content: const Text(
+                        "Çıkış Yapmak istediğinize emin misiniz?",
+                        style: TextStyle(color: darkColor),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () async {
+                            await auth.signOut().then((value) async {
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+
+                              await prefs.setBool("loggedIn", false);
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ),
+                                  (route) => false);
+                            });
+                          },
+                          child: const Text(
+                            "Çıkış Yap",
+                            style: TextStyle(color: darkColor),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            "Vazgeç",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:denge/utils/appColors.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class DengeOptionButton extends StatefulWidget {
   final String option;
@@ -21,6 +22,7 @@ class DengeOptionButton extends StatefulWidget {
 }
 
 class _DengeOptionButtonState extends State<DengeOptionButton> {
+  var box = Hive.box("achievements");
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,8 +35,12 @@ class _DengeOptionButtonState extends State<DengeOptionButton> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          onPressed: () {
+          onPressed: () async {
+            int total = box.get("total") ?? 0;
+            await box.put("total", total + 1);
             if (widget.option == widget.correctAnswer) {
+              int correct = box.get("correct") ?? 0;
+              await box.put("correct", correct + 1);
               setState(() {
                 widget.color = Colors.green;
                 widget.backgroundColor = const Color(0xffC9F4DE);

@@ -153,8 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                                   SharedPreferences prefs =
                                       await SharedPreferences.getInstance();
 
-                                  await prefs.setString(
-                                      'token', value.user!.uid);
+                                  await prefs.setBool("loggedIn", true);
 
                                   Navigator.push(
                                       context,
@@ -176,11 +175,6 @@ class _LoginPageState extends State<LoginPage> {
                                       .showSnackBar(snackBar);
                                 });
                               }
-                              // Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: ((context) =>
-                              //             const DashboardScreen())));
                             },
                           )),
                       const SizedBox(height: 20),

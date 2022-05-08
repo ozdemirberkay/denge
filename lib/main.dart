@@ -1,6 +1,8 @@
-import 'package:denge/auth/InitScreen.dart';
+import 'package:denge/DashboardScreen.dart';
+import 'package:denge/auth/FirstPage.dart';
 import 'package:denge/model/word_model.dart';
 import 'package:denge/utils/appColors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,12 +17,18 @@ void main() async {
   await Hive.initFlutter("dengewords");
   Hive.registerAdapter(DengeWordAdapter());
   await Hive.openBox<DengeWord>("word");
+  await Hive.openBox("achievements");
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,7 +41,9 @@ class MyApp extends StatelessWidget {
               displayColor: darkColor,
             ),
       ),
-      home: const InitScreen(),
+      home: FirebaseAuth.instance.currentUser == null
+          ? const FirstPage()
+          : const DashboardScreen(),
     );
   }
 }

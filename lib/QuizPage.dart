@@ -13,130 +13,155 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Question> allQuestion = [];
+  late final Future<List<Question>> allFutureQuestion;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   int index = 0;
 
   @override
   void initState() {
-    getQuizQuestion();
+    allFutureQuestion = getQuizQuestion();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(child: Container()),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DengeOutlinedButton(
-              label: "Önceki Soru",
-              icon: Icons.arrow_back,
-              reverse: true,
-              onPressed: () {
-                if (index > 0) {
-                  setState(() {
-                    index--;
-                  });
-                } else {
-                  final snackBar = SnackBar(
-                    content: const Text(
-                      'İlk Sorudasınız',
-                      textAlign: TextAlign.center,
+    return FutureBuilder(
+        future: allFutureQuestion,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<Question> allQuestion = snapshot.data as List<Question>;
+
+            return Column(
+              children: [
+                Expanded(child: Container()),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    DengeOutlinedButton(
+                      label: "Önceki Soru",
+                      icon: Icons.arrow_back,
+                      reverse: true,
+                      onPressed: () {
+                        if (index > 0) {
+                          setState(() {
+                            index--;
+                          });
+                        } else {
+                          final snackBar = SnackBar(
+                            content: const Text(
+                              'İlk Sorudasınız',
+                              textAlign: TextAlign.center,
+                            ),
+                            action: SnackBarAction(
+                                textColor: darkColor,
+                                label: "Kapat",
+                                onPressed: () {}),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
                     ),
-                    action: SnackBarAction(
-                        textColor: darkColor, label: "Kapat", onPressed: () {}),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              },
-            ),
-            DengeOutlinedButton(
-              label: "Sonraki Soru",
-              icon: Icons.arrow_forward,
-              onPressed: () {
-                if (index < allQuestion.length - 1) {
-                  setState(() {
-                    index++;
-                  });
-                } else {
-                  final snackBar = SnackBar(
-                    content: const Text(
-                      'Son Sorudasınız',
-                      textAlign: TextAlign.center,
+                    DengeOutlinedButton(
+                      label: "Sonraki Soru",
+                      icon: Icons.arrow_forward,
+                      onPressed: () {
+                        if (index < allQuestion.length - 1) {
+                          setState(() {
+                            index++;
+                          });
+                        } else {
+                          final snackBar = SnackBar(
+                            content: const Text(
+                              'Son Sorudasınız',
+                              textAlign: TextAlign.center,
+                            ),
+                            action: SnackBarAction(
+                                textColor: darkColor,
+                                label: "Kapat",
+                                onPressed: () {}),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }
+                      },
                     ),
-                    action: SnackBarAction(
-                        textColor: darkColor, label: "Kapat", onPressed: () {}),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              },
-            ),
-          ],
-        ),
-        Expanded(child: Container()),
-        Text(
-          allQuestion[index].question,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-              color: darkColor, fontWeight: FontWeight.bold, fontSize: 36),
-        ),
-        const SizedBox(height: 20),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 25.0),
-          child: Text(
-            "Kelimesinin anlamı aşağıdakilerden hangisidir?",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: darkColor, fontWeight: FontWeight.bold, fontSize: 22),
-          ),
-        ),
-        Expanded(child: Container()),
-        Container(
-          alignment: Alignment.bottomCenter,
-          decoration: const BoxDecoration(
-            color: darkColor,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(25), topRight: Radius.circular(25)),
-          ),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
-            const SizedBox(height: 20),
-            DengeOptionButton(
-                option: allQuestion[index].answer1,
-                correctAnswer: allQuestion[index].correctAnswer),
-            DengeOptionButton(
-                option: allQuestion[index].answer2,
-                correctAnswer: allQuestion[index].correctAnswer),
-            DengeOptionButton(
-                option: allQuestion[index].answer3,
-                correctAnswer: allQuestion[index].correctAnswer),
-            DengeOptionButton(
-                option: allQuestion[index].answer4,
-                correctAnswer: allQuestion[index].correctAnswer),
-            DengeOptionButton(
-                option: allQuestion[index].answer5,
-                correctAnswer: allQuestion[index].correctAnswer),
-            const SizedBox(height: 20),
-          ]),
-          //     Expanded(
-          //   child: ListView.builder(
-          //     itemBuilder: (context, index) {
-          //       return DengeOptionButton(
-          //           optiyon: butunsecenekler[index],
-          //           correctAnswer: butunsecenekler[1]);
-          //     },
-          //     itemCount: 5,
-          //   ),
-          // ),
-        )
-      ],
-    );
+                  ],
+                ),
+                Expanded(child: Container()),
+                Text(
+                  allQuestion[index].question,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      color: darkColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 36),
+                ),
+                const SizedBox(height: 20),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.0),
+                  child: Text(
+                    "Kelimesinin anlamı aşağıdakilerden hangisidir?",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: darkColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 22),
+                  ),
+                ),
+                Expanded(child: Container()),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  decoration: const BoxDecoration(
+                    color: darkColor,
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(25),
+                        topRight: Radius.circular(25)),
+                  ),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const SizedBox(height: 20),
+                        DengeOptionButton(
+                            option: allQuestion[index].answer1,
+                            correctAnswer: allQuestion[index].correctAnswer),
+                        DengeOptionButton(
+                            option: allQuestion[index].answer2,
+                            correctAnswer: allQuestion[index].correctAnswer),
+                        DengeOptionButton(
+                            option: allQuestion[index].answer3,
+                            correctAnswer: allQuestion[index].correctAnswer),
+                        DengeOptionButton(
+                            option: allQuestion[index].answer4,
+                            correctAnswer: allQuestion[index].correctAnswer),
+                        DengeOptionButton(
+                            option: allQuestion[index].answer5,
+                            correctAnswer: allQuestion[index].correctAnswer),
+                        const SizedBox(height: 20),
+                      ]),
+                  //     Expanded(
+                  //   child: ListView.builder(
+                  //     itemBuilder: (context, index) {
+                  //       return DengeOptionButton(
+                  //           optiyon: butunsecenekler[index],
+                  //           correctAnswer: butunsecenekler[1]);
+                  //     },
+                  //     itemCount: 5,
+                  //   ),
+                  // ),
+                )
+              ],
+            );
+          } else {
+            return const Center(
+                child: CircularProgressIndicator(
+              color: darkColor,
+            ));
+          }
+        });
   }
 
-  Future<void> getQuizQuestion() async {
+  Future<List<Question>> getQuizQuestion() async {
+    List<Question> allQuestion = [];
+
     var _questionDoc = await firestore.collection("questions").get();
     for (var item in _questionDoc.docs) {
       Map userMap = item.data();
@@ -151,6 +176,6 @@ class _QuizPageState extends State<QuizPage> {
       );
       allQuestion.add(temp);
     }
-    print(allQuestion.length.toString());
+    return allQuestion;
   }
 }
