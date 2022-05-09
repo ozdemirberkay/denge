@@ -45,8 +45,9 @@ class _QuizPageState extends State<QuizPage> {
                       onPressed: () {
                         if (index > 0) {
                           setState(() {
-                            index--;
                             isDisable = false;
+
+                            index--;
                           });
                         } else {
                           final snackBar = SnackBar(
@@ -69,8 +70,9 @@ class _QuizPageState extends State<QuizPage> {
                       onPressed: () {
                         if (index < allQuestion.length - 1) {
                           setState(() {
-                            index++;
                             isDisable = false;
+
+                            index++;
                           });
                         } else {
                           final snackBar = SnackBar(
@@ -126,31 +128,27 @@ class _QuizPageState extends State<QuizPage> {
                         DengeOptionButton(
                           option: allQuestion[index].answer1,
                           correctAnswer: allQuestion[index].correctAnswer,
-                          onPressed: isDisable
-                              ? null
-                              : () {
-                                  print("a");
-
-                                  setState(() {
-                                    isDisable = true;
-                                  });
-                                },
+                          onPressed: isDisable ? null : buttonFunc,
                         ),
                         DengeOptionButton(
                           option: allQuestion[index].answer2,
                           correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable ? null : buttonFunc,
                         ),
                         DengeOptionButton(
                           option: allQuestion[index].answer3,
                           correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable ? null : buttonFunc,
                         ),
                         DengeOptionButton(
                           option: allQuestion[index].answer4,
                           correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable ? null : buttonFunc,
                         ),
                         DengeOptionButton(
                           option: allQuestion[index].answer5,
                           correctAnswer: allQuestion[index].correctAnswer,
+                          onPressed: isDisable ? null : buttonFunc,
                         ),
                         const SizedBox(height: 20),
                       ]),
@@ -194,5 +192,11 @@ class _QuizPageState extends State<QuizPage> {
       allQuestion.add(temp);
     }
     return allQuestion;
+  }
+
+  void buttonFunc() {
+    setState(() {
+      isDisable = true;
+    });
   }
 }

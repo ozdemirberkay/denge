@@ -5,7 +5,6 @@ import 'package:denge/utils/appColors.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widget/DengeButton.dart';
 import '../widget/DengeInput.dart';

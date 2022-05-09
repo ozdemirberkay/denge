@@ -183,7 +183,9 @@ class _AchievementsState extends State<Achievements> {
                           color: darkColor, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "% ${((correct / total) * 100).toStringAsFixed(2)}",
+                      total != 0
+                          ? "% ${((correct / total) * 100).toStringAsFixed(2)}"
+                          : "0",
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           color: darkColor, fontWeight: FontWeight.bold),
@@ -194,7 +196,7 @@ class _AchievementsState extends State<Achievements> {
               Slider(
                 activeColor: Colors.green,
                 inactiveColor: lightColor,
-                value: ((correct / total) * 100),
+                value: total != 0 ? ((correct / total) * 100) : 0,
                 onChanged: (value) {},
                 min: 0,
                 max: 100,

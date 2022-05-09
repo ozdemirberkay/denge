@@ -18,6 +18,9 @@ void main() async {
   Hive.registerAdapter(DengeWordAdapter());
   await Hive.openBox<DengeWord>("word");
   await Hive.openBox("achievements");
+  var box = Hive.box("achievements");
+  box.put("total", 0);
+  box.put("correct", 0);
 
   runApp(const MyApp());
 }
