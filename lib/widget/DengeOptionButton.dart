@@ -36,26 +36,23 @@ class _DengeOptionButtonState extends State<DengeOptionButton> {
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
-          onPressed: widget.onPressed != null
-              ? () async {
-                  int total = box.get("total") ?? 0;
-                  await box.put("total", total + 1);
-                  if (widget.option == widget.correctAnswer) {
-                    int correct = box.get("correct") ?? 0;
-                    await box.put("correct", correct + 1);
-                    setState(() {
-                      widget.color = Colors.green;
-                      widget.backgroundColor = const Color(0xffC9F4DE);
-                    });
-                  } else {
-                    setState(() {
-                      widget.color = Colors.red;
-                      widget.backgroundColor = const Color(0xffEBD6DA);
-                    });
-                  }
-                  widget.onPressed!.call();
-                }
-              : null,
+          onPressed: () async {
+            int total = box.get("total") ?? 0;
+            await box.put("total", total + 1);
+            if (widget.option == widget.correctAnswer) {
+              int correct = box.get("correct") ?? 0;
+              await box.put("correct", correct + 1);
+              setState(() {
+                widget.color = Colors.green;
+                widget.backgroundColor = const Color(0xffC9F4DE);
+              });
+            } else {
+              setState(() {
+                widget.color = Colors.red;
+                widget.backgroundColor = const Color(0xffEBD6DA);
+              });
+            }
+          },
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 6),
             child: Text(

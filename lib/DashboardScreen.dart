@@ -6,6 +6,7 @@ import 'package:denge/screen/Achievements.dart';
 import 'package:denge/screen/RecordedPage.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import 'utils/appColors.dart';
@@ -23,6 +24,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int selectedIndex = 0;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   String name = "";
+  String photoURL = "";
 
   Future<void> getName() async {
     var snapshot =
@@ -30,6 +32,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     Map<String, dynamic>? dataMap = snapshot.data();
 
     name = dataMap!["nameSurname"];
+    var _profilePhotoRef =
+        FirebaseStorage.instance.ref("users/${auth.currentUser!.uid}");
+    photoURL = await _profilePhotoRef.getDownloadURL();
     setState(() {});
   }
 
@@ -71,10 +76,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 child: Column(
                   children: [
-                    const Expanded(
+                    Expanded(
                         child: CircleAvatar(
                       radius: 60,
-                      backgroundColor: lightColor,
+                      backgroundColor: photoURL == "" ? lightColor : darkColor,
+                      child: photoURL == ""
+                          ? Container()
+                          : ClipOval(
+                              child: Image(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(photoURL)),
+                            ),
                     )),
                     const SizedBox(height: 5),
                     Text(

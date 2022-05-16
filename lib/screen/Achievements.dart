@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:denge/utils/appColors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Achievements extends StatefulWidget {
   const Achievements({Key? key}) : super(key: key);
@@ -16,6 +20,7 @@ class _AchievementsState extends State<Achievements> {
   String name = "";
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  String photoURL = "";
 
   Future<void> getName() async {
     var snapshot =
@@ -23,6 +28,9 @@ class _AchievementsState extends State<Achievements> {
     Map<String, dynamic>? dataMap = snapshot.data();
 
     name = dataMap!["nameSurname"];
+    var _profilePhotoRef =
+        FirebaseStorage.instance.ref("users/${auth.currentUser!.uid}");
+    photoURL = await _profilePhotoRef.getDownloadURL();
     setState(() {});
   }
 
@@ -54,14 +62,29 @@ class _AchievementsState extends State<Achievements> {
       body: Column(children: [
         const SizedBox(height: 10),
         Container(
-          margin: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width / 5),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: const Image(
-              image: NetworkImage(
-                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
-            ),
+          width: MediaQuery.of(context).size.width * 2 / 3,
+          height: MediaQuery.of(context).size.width * 2 / 3,
+          child: Stack(
+            children: [
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: photoURL == ""
+                      ? Container(color: darkColor)
+                      : Image(fit: BoxFit.cover, image: NetworkImage(photoURL)),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: IconButton(
+                  onPressed: getBottomSheet,
+                  icon: const Icon(
+                    Icons.edit,
+                    color: lightColor,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
         const SizedBox(height: 10),
@@ -206,5 +229,99 @@ class _AchievementsState extends State<Achievements> {
         ),
       ]),
     );
+  }
+
+  void getBottomSheet() {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: lightColor,
+        builder: (context) {
+          return DraggableScrollableSheet(
+            expand: false,
+            initialChildSize: 0.3,
+            builder: (context, scrollController) {
+              return Container(
+                margin: const EdgeInsets.all(8),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 0, 0, 11),
+                      width: 60,
+                      height: 6,
+                      decoration: BoxDecoration(
+                          color: darkColor,
+                          borderRadius: BorderRadius.circular(100)),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 15),
+                      child: const Text(
+                        "Profil Fotoğrafı Değiştir",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: darkColor),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        FloatingActionButton.extended(
+                          backgroundColor: darkColor,
+                          onPressed: (() async {
+                            final XFile? image = await ImagePicker()
+                                .pickImage(source: ImageSource.gallery);
+                            if (image != null) {
+                              await photoChange(File(image.path));
+                              setState(() {});
+                            }
+                          }),
+                          elevation: 0,
+                          label: const Text(
+                            "Galeriden Seç",
+                            style: TextStyle(color: lightColor),
+                          ),
+                          icon: const Icon(
+                            Icons.image,
+                            color: lightColor,
+                          ),
+                        ),
+                        FloatingActionButton.extended(
+                          backgroundColor: darkColor,
+                          onPressed: (() async {
+                            final XFile? image = await ImagePicker()
+                                .pickImage(source: ImageSource.camera);
+                            if (image != null) {
+                              await photoChange(File(image.path));
+                              setState(() {});
+                            }
+                          }),
+                          elevation: 0,
+                          label: const Text(
+                            "Fotoğraf Çek",
+                            style: TextStyle(color: lightColor),
+                          ),
+                          icon: const Icon(
+                            Icons.camera_alt_rounded,
+                            color: lightColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        });
+  }
+
+  Future<void> photoChange(File imageFile) async {
+    var _profilePhotoRef =
+        FirebaseStorage.instance.ref("users/${auth.currentUser!.uid}");
+    _profilePhotoRef.putFile(imageFile).whenComplete(() async {
+      photoURL = await _profilePhotoRef.getDownloadURL();
+      print(photoURL + "***xxxxxxxx***");
+      setState(() {});
+    });
   }
 }
