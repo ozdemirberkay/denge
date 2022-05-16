@@ -41,11 +41,16 @@ class RecordedWidget extends StatelessWidget {
                 color: lightColor,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
-                englishWord,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    color: darkColor, fontWeight: FontWeight.bold),
+              child: Center(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Text(
+                    englishWord,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: darkColor, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
           ),
@@ -72,11 +77,16 @@ class RecordedWidget extends StatelessWidget {
                 color: lightColor,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: Text(
-                turkishWord,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                    color: darkColor, fontWeight: FontWeight.bold),
+              child: Center(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Text(
+                    turkishWord,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: darkColor, fontWeight: FontWeight.bold),
+                  ),
+                ),
               ),
             ),
           ),
