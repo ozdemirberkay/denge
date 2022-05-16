@@ -42,8 +42,8 @@ class _AchievementsState extends State<Achievements> {
 
   @override
   Widget build(BuildContext context) {
-    int correct = box.get("correct");
-    int total = box.get("total");
+    int correct = box.get("correct") ?? 0;
+    int total = box.get("total") ?? 0;
 
     return Scaffold(
       backgroundColor: lightColor,

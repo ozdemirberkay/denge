@@ -26,6 +26,8 @@ class _DengeOptionButtonState extends State<DengeOptionButton> {
   var box = Hive.box("achievements");
   @override
   Widget build(BuildContext context) {
+    bool isDisabled = false;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: OutlinedButton(
@@ -39,12 +41,14 @@ class _DengeOptionButtonState extends State<DengeOptionButton> {
           onPressed: () async {
             int total = box.get("total") ?? 0;
             await box.put("total", total + 1);
+
             if (widget.option == widget.correctAnswer) {
               int correct = box.get("correct") ?? 0;
               await box.put("correct", correct + 1);
               setState(() {
                 widget.color = Colors.green;
                 widget.backgroundColor = const Color(0xffC9F4DE);
+                isDisabled = true;
               });
             } else {
               setState(() {
