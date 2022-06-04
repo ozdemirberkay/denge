@@ -1,16 +1,5 @@
 # denge
 
-A new Flutter project.
+İngilizce kelime öğrenme ve soru çözme uygulaması
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Screenshot_1653903955](https://user-images.githubusercontent.com/55758394/172017293-4636acbe-9e30-4fd4-bece-c541bfe8df0a.png)
