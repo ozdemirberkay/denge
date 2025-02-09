@@ -1,12 +1,12 @@
-import 'package:denge/utils/appColors.dart';
+import 'package:denge/constants/appColors.dart';
 import 'package:denge/widget/RecordedWidget.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../model/word_model.dart';
 
 class RecordedPage extends StatefulWidget {
-  const RecordedPage({Key? key}) : super(key: key);
+  const RecordedPage({super.key});
 
   @override
   State<RecordedPage> createState() => _RecordedPageState();
@@ -22,9 +22,9 @@ class _RecordedPageState extends State<RecordedPage> {
     return Column(
       children: [
         const SizedBox(height: 5),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
+          children: [
             Text(
               "İNGİLİZCE",
               style: TextStyle(
@@ -81,7 +81,7 @@ class _RecordedPageState extends State<RecordedPage> {
           decoration: BoxDecoration(
               color: darkColor, borderRadius: BorderRadius.circular(8)),
           child: Text(
-            "Kaydedilen Kelime Sayısı : " + box.length.toString(),
+            "Kaydedilen Kelime Sayısı : ${box.length}",
             textAlign: TextAlign.center,
             style: const TextStyle(
                 color: lightColor, fontWeight: FontWeight.bold, fontSize: 20),

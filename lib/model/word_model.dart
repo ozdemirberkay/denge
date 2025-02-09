@@ -1,4 +1,5 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 part 'word_model.g.dart';
 
 @HiveType(typeId: 1)
@@ -13,6 +14,6 @@ class DengeWord {
 
   @override
   String toString() {
-    return turkish.toString() + " --- " + english.toString() + "\n";
+    return "$turkish --- $english\n";
   }
 }

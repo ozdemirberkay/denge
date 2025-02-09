@@ -1,6 +1,9 @@
-class Category {
-  final String categoryName;
-  final String categoryPhoto;
+import 'package:denge/model/category_data.dart';
 
-  Category(this.categoryName, this.categoryPhoto);
+class Category {
+  final String name;
+  final String photo;
+  final List<CategoryData> data;
+
+  Category({required this.name, required this.photo, required this.data});
 }

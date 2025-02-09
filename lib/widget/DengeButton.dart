@@ -1,4 +1,4 @@
-import 'package:denge/utils/appColors.dart';
+import 'package:denge/constants/appColors.dart';
 import 'package:flutter/material.dart';
 
 class DengeButton extends StatelessWidget {
@@ -8,22 +8,21 @@ class DengeButton extends StatelessWidget {
   final Color? color;
 
   const DengeButton({
-    Key? key,
+    super.key,
     required this.label,
     this.onPressed,
     this.icon,
     this.color = darkColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(backgroundColor: darkColor),
       child: Text(
         label,
-        style: const TextStyle(color: lightColor),
       ),
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(primary: darkColor),
     );
   }
 }

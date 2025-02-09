@@ -1,31 +1,24 @@
+import 'package:denge/model/category.dart';
 import 'package:denge/screen/CategoryDetail.dart';
-import 'package:denge/utils/appColors.dart';
+import 'package:denge/constants/appColors.dart';
 import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatelessWidget {
-  final String categoryName;
-  final String categoryPhoto;
-  final int categoryIndex;
+  final Category category;
 
-  const CategoryWidget(
-      {Key? key,
-      required this.categoryName,
-      required this.categoryPhoto,
-      required this.categoryIndex})
-      : super(key: key);
+  const CategoryWidget({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
-    String imagePath = "assets/images/$categoryPhoto";
     return InkWell(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => CategoryDetail(
-                categoryIndex: categoryIndex,
-                categoryPhoto: categoryPhoto,
-                categoryName: categoryName,
+                categoryPhoto: category.photo,
+                categoryName: category.name,
+                allData: category.data,
               ),
             ));
       },
@@ -37,10 +30,10 @@ class CategoryWidget extends StatelessWidget {
           children: [
             Expanded(
                 child: Image(
-              image: AssetImage(imagePath),
+              image: AssetImage(category.photo),
             )),
             Text(
-              categoryName,
+              category.name,
               style: const TextStyle(color: lightColor, fontSize: 16),
             )
           ],

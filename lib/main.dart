@@ -1,39 +1,30 @@
-import 'package:denge/DashboardScreen.dart';
-import 'package:denge/auth/FirstPage.dart';
+import 'package:denge/screen/DashboardScreen.dart';
 import 'package:denge/model/word_model.dart';
-import 'package:denge/utils/appColors.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:denge/constants/appColors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'firebase_options.dart';
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
   await Hive.initFlutter("dengewords");
   Hive.registerAdapter(DengeWordAdapter());
   await Hive.openBox<DengeWord>("word");
-  await Hive.openBox("achievements");
-  var box = Hive.box("achievements");
-  runApp(const MyApp());
+  runApp(const DengeApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class DengeApp extends StatefulWidget {
+  const DengeApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<DengeApp> createState() => _DengeAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _DengeAppState extends State<DengeApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'DENGE',
+      title: 'Denge',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.indigo,
@@ -42,9 +33,7 @@ class _MyAppState extends State<MyApp> {
               displayColor: darkColor,
             ),
       ),
-      home: FirebaseAuth.instance.currentUser == null
-          ? const FirstPage()
-          : const DashboardScreen(),
+      home: const DashboardScreen(),
     );
   }
 }
