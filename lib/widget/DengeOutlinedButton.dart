@@ -1,4 +1,4 @@
-import 'package:denge/utils/appColors.dart';
+import 'package:denge/constants/appColors.dart';
 import 'package:flutter/material.dart';
 
 class DengeOutlinedButton extends StatefulWidget {
@@ -9,13 +9,12 @@ class DengeOutlinedButton extends StatefulWidget {
   final Color color;
 
   const DengeOutlinedButton(
-      {Key? key,
+      {super.key,
       required this.label,
       required this.icon,
       this.reverse = false,
       this.onPressed,
-      this.color = darkColor})
-      : super(key: key);
+      this.color = darkColor});
 
   @override
   State<DengeOutlinedButton> createState() => _DengeOutlinedButtonState();

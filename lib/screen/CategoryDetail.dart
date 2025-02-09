@@ -1,26 +1,22 @@
-import 'package:denge/data/strings.dart';
+import 'package:denge/constants/data.dart';
 import 'package:denge/model/word_model.dart';
-import 'package:denge/utils/appColors.dart';
+import 'package:denge/constants/appColors.dart';
 import 'package:denge/widget/DengeOutlinedButton.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../model/category_data.dart';
 
 class CategoryDetail extends StatefulWidget {
   final String categoryName;
   final String categoryPhoto;
-  final int categoryIndex;
-  late final List<CategoryData> allData;
+  final List<CategoryData> allData;
 
-  CategoryDetail(
-      {Key? key,
+  const CategoryDetail(
+      {super.key,
       required this.categoryName,
       required this.categoryPhoto,
-      required this.categoryIndex})
-      : super(key: key) {
-    allData = getData(categoryIndex);
-  }
+      required this.allData});
 
   @override
   State<CategoryDetail> createState() => _CategoryDetailState();
@@ -32,8 +28,6 @@ class _CategoryDetailState extends State<CategoryDetail> {
 
   @override
   Widget build(BuildContext context) {
-    String imagePath = "assets/images/${widget.categoryPhoto}";
-
     return Scaffold(
       backgroundColor: lightColor,
       appBar: AppBar(
@@ -53,7 +47,7 @@ class _CategoryDetailState extends State<CategoryDetail> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 24.0, left: 24, right: 24),
-              child: Image(image: AssetImage(imagePath)),
+              child: Image(image: AssetImage(widget.categoryPhoto)),
             ),
           ),
           Container(
@@ -108,12 +102,11 @@ class _CategoryDetailState extends State<CategoryDetail> {
                   ),
                 ],
               ),
-              Row(
-                children: const [
+              const Row(
+                children: [
                   CircleAvatar(
                     radius: 24,
-                    backgroundImage:
-                        AssetImage("assets/images/ingilizbayrak.png"),
+                    backgroundImage: AssetImage(AppData.enFlag),
                   ),
                   SizedBox(width: 15),
                   Text(
@@ -145,11 +138,11 @@ class _CategoryDetailState extends State<CategoryDetail> {
                 ),
               ),
               const SizedBox(height: 5),
-              Row(
-                children: const [
+              const Row(
+                children: [
                   CircleAvatar(
                     radius: 24,
-                    backgroundImage: AssetImage("assets/images/türkbayrak.png"),
+                    backgroundImage: AssetImage(AppData.trFlag),
                   ),
                   SizedBox(width: 15),
                   Text(
@@ -261,14 +254,4 @@ class _CategoryDetailState extends State<CategoryDetail> {
       i++;
     }
   }
-}
-
-List<CategoryData> getData(int categoryIndex) {
-  late List<CategoryData> tempAllData = [];
-
-  for (var item in Strings.DATA[categoryIndex]) {
-    CategoryData temp = CategoryData.fromMap(item);
-    tempAllData.add(temp);
-  }
-  return tempAllData;
 }

@@ -1,4 +1,4 @@
-import 'package:denge/utils/appColors.dart';
+import 'package:denge/constants/appColors.dart';
 import 'package:flutter/material.dart';
 
 class DengeInput extends StatefulWidget {
@@ -10,15 +10,14 @@ class DengeInput extends StatefulWidget {
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
   const DengeInput(
-      {Key? key,
+      {super.key,
       this.labelText,
       required this.controller,
       this.keyboardType = TextInputType.text,
       this.obscureText = false,
       required this.suffixIcon,
       this.validator,
-      this.focusNode})
-      : super(key: key);
+      this.focusNode});
 
   @override
   State<DengeInput> createState() => _DengeInputState();

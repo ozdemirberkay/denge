@@ -1,4 +1,5 @@
-import 'package:denge/utils/appColors.dart';
+import 'package:denge/constants/appColors.dart';
+import 'package:denge/constants/data.dart';
 import 'package:flutter/material.dart';
 
 class RecordedWidget extends StatelessWidget {
@@ -6,11 +7,10 @@ class RecordedWidget extends StatelessWidget {
   final String turkishWord;
   final VoidCallback? onPressed;
   const RecordedWidget(
-      {Key? key,
+      {super.key,
       required this.englishWord,
       required this.turkishWord,
-      this.onPressed})
-      : super(key: key);
+      this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class RecordedWidget extends StatelessWidget {
       child: Row(
         children: [
           const CircleAvatar(
-            backgroundImage: AssetImage("assets/images/ingilizbayrak.png"),
+            backgroundImage: AssetImage(AppData.enFlag),
           ),
           const SizedBox(width: 5),
           Expanded(
@@ -92,7 +92,7 @@ class RecordedWidget extends StatelessWidget {
           ),
           const SizedBox(width: 5),
           const CircleAvatar(
-            backgroundImage: AssetImage("assets/images/türkbayrak.png"),
+            backgroundImage: AssetImage(AppData.trFlag),
           ),
         ],
       ),
