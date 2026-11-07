@@ -1,0 +1,398 @@
+[
+  {
+    "name": "Eşyalar",
+    "image": "assets/images/category/tool.png",
+    "words": [
+      {
+        "turkish": "Kitaplık",
+        "english": "Bookshelf"
+      },
+      {
+        "turkish": "Çalışma Masası",
+        "english": "Desk"
+      },
+      {
+        "turkish": "Hamak",
+        "english": "Hammock"
+      },
+      {
+        "turkish": "Sandalye",
+        "english": "Chair"
+      },
+      {
+        "turkish": "Bank",
+        "english": "Bench"
+      },
+      {
+        "turkish": "Lavabo",
+        "english": "Sink"
+      },
+      {
+        "turkish": "Havlu",
+        "english": "Towel"
+      },
+      {
+        "turkish": "Musluk",
+        "english": "Faucet"
+      }
+    ]
+  },
+  {
+    "name": "Mevsimler",
+    "image": "assets/images/category/season.png",
+    "words": [
+      {
+        "turkish": "Yaz",
+        "english": "Summer"
+      },
+      {
+        "turkish": "Sonbahar",
+        "english": "Autumn"
+      },
+      {
+        "turkish": "Kış",
+        "english": "Winter"
+      },
+      {
+        "turkish": "İlkbahar",
+        "english": "Spring"
+      }
+    ]
+  },
+  {
+    "name": "Hayvanlar",
+    "image": "assets/images/category/animal.png",
+    "words": [
+      {
+        "turkish": "Köpek",
+        "english": "Dog"
+      },
+      {
+        "turkish": "Kaplumbağa",
+        "english": "Turtle"
+      },
+      {
+        "turkish": "Tavşan",
+        "english": "Rabbit"
+      },
+      {
+        "turkish": "Kedi",
+        "english": "Cat"
+      },
+      {
+        "turkish": "Fare",
+        "english": "Mouse"
+      },
+      {
+        "turkish": "Kuş",
+        "english": "Bird"
+      },
+      {
+        "turkish": "Güvercin",
+        "english": "Pigeon"
+      },
+      {
+        "turkish": "At",
+        "english": "Horse"
+      },
+      {
+        "turkish": "Arı",
+        "english": "Bee"
+      },
+      {
+        "turkish": "Yengeç",
+        "english": "Crab"
+      },
+      {
+        "turkish": "Hindi",
+        "english": "Turkey"
+      },
+      {
+        "turkish": "Tavuk",
+        "english": "Chicken"
+      }
+    ]
+  },
+  {
+    "name": "Sporlar",
+    "image": "assets/images/category/sport.png",
+    "words": [
+      {
+        "turkish": "Basketbol",
+        "english": "Basketball"
+      },
+      {
+        "turkish": "Okçuluk",
+        "english": "Archery"
+      },
+      {
+        "turkish": "Beyzbol",
+        "english": "Baseball"
+      },
+      {
+        "turkish": "Maraton",
+        "english": "Marathon"
+      },
+      {
+        "turkish": "Futbol",
+        "english": "Football"
+      },
+      {
+        "turkish": "Bisiklet Sürmek",
+        "english": "Cycling"
+      },
+      {
+        "turkish": "Yüzme",
+        "english": "Swimming"
+      },
+      {
+        "turkish": "Tenis",
+        "english": "Tennis"
+      },
+      {
+        "turkish": "Kayak",
+        "english": "Skiing"
+      },
+      {
+        "turkish": "Hentbol",
+        "english": "Handball"
+      },
+      {
+        "turkish": "Sörf",
+        "english": "Surfing"
+      }
+    ]
+  },
+  {
+    "name": "Meslekler",
+    "image": "assets/images/category/occupation.png",
+    "words": [
+      {
+        "turkish": "Muhasebeci",
+        "english": "Accountant"
+      },
+      {
+        "turkish": "Yönetici",
+        "english": "Administrator"
+      },
+      {
+        "turkish": "Simyacı",
+        "english": "Alchemist"
+      },
+      {
+        "turkish": "Yazar",
+        "english": "Author"
+      },
+      {
+        "turkish": "Temizlikçi",
+        "english": "Cleaner"
+      },
+      {
+        "turkish": "Mühendis",
+        "english": "Engineer"
+      },
+      {
+        "turkish": "Çiftçi",
+        "english": "Farmer"
+      },
+      {
+        "turkish": "Çiçekçi",
+        "english": "Florist"
+      },
+      {
+        "turkish": "Avcı",
+        "english": "Hunter"
+      },
+      {
+        "turkish": "Gazeteci",
+        "english": "Journalist"
+      },
+      {
+        "turkish": "Stajyer",
+        "english": "Intern"
+      },
+      {
+        "turkish": "Avukat",
+        "english": "Lawyer"
+      },
+      {
+        "turkish": "Yargıç",
+        "english": "Judge"
+      },
+      {
+        "turkish": "Tamirci",
+        "english": "Mechanic"
+      },
+      {
+        "turkish": "Madenci",
+        "english": "Miner"
+      },
+      {
+        "turkish": "Muhafız",
+        "english": "Guard"
+      },
+      {
+        "turkish": "Müzisyen",
+        "english": "Musician"
+      },
+      {
+        "turkish": "Bakan",
+        "english": "Minister"
+      },
+      {
+        "turkish": "Ressam",
+        "english": "Painter"
+      },
+      {
+        "turkish": "Eczacı",
+        "english": "Pharmacist"
+      },
+      {
+        "turkish": "Hemşire",
+        "english": "Nurse"
+      },
+      {
+        "turkish": "Ajan",
+        "english": "Spy"
+      },
+      {
+        "turkish": "Asker",
+        "english": "Soldier"
+      },
+      {
+        "turkish": "Şarkıcı",
+        "english": "Singer"
+      }
+    ]
+  },
+  {
+    "name": "Aylar",
+    "image": "assets/images/category/month.png",
+    "words": [
+      {
+        "turkish": "Ocak",
+        "english": "January"
+      },
+      {
+        "turkish": "Şubat",
+        "english": "February"
+      },
+      {
+        "turkish": "Mart",
+        "english": "March"
+      },
+      {
+        "turkish": "Nisan",
+        "english": "April"
+      },
+      {
+        "turkish": "Mayıs",
+        "english": "May"
+      },
+      {
+        "turkish": "Haziran",
+        "english": "June"
+      },
+      {
+        "turkish": "Temmuz",
+        "english": "July"
+      },
+      {
+        "turkish": "Ağustos",
+        "english": "August"
+      },
+      {
+        "turkish": "Eylül",
+        "english": "September"
+      },
+      {
+        "turkish": "Ekim",
+        "english": "October"
+      },
+      {
+        "turkish": "Kasım",
+        "english": "November"
+      },
+      {
+        "turkish": "Aralık",
+        "english": "December"
+      }
+    ]
+  },
+  {
+    "name": "Renkler",
+    "image": "assets/images/category/color.png",
+    "words": [
+      {
+        "turkish": "Beyaz",
+        "english": "White"
+      },
+      {
+        "turkish": "Kırmızı",
+        "english": "Red"
+      },
+      {
+        "turkish": "Yeşil",
+        "english": "Green"
+      },
+      {
+        "turkish": "Mavi",
+        "english": "Blue"
+      },
+      {
+        "turkish": "Kahverengi",
+        "english": "Brown"
+      },
+      {
+        "turkish": "Turuncu",
+        "english": "Orange"
+      },
+      {
+        "turkish": "Mor",
+        "english": "Purple"
+      },
+      {
+        "turkish": "Siyah",
+        "english": "Black"
+      },
+      {
+        "turkish": "Gri",
+        "english": "Grey"
+      }
+    ]
+  },
+  {
+    "name": "Günler",
+    "image": "assets/images/category/day.png",
+    "words": [
+      {
+        "turkish": "Pazartesi",
+        "english": "Monday"
+      },
+      {
+        "turkish": "Salı",
+        "english": "Tuesday"
+      },
+      {
+        "turkish": "Çarşamba",
+        "english": "Wednesday"
+      },
+      {
+        "turkish": "Perşembe",
+        "english": "Thursday"
+      },
+      {
+        "turkish": "Cuma",
+        "english": "Friday"
+      },
+      {
+        "turkish": "Cumartesi",
+        "english": "Saturday"
+      },
+      {
+        "turkish": "Pazar",
+        "english": "Sunday"
+      }
+    ]
+  }
+]
